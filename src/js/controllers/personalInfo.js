@@ -6,11 +6,12 @@
 
             $log.log( "loaded personalInfoCtrl ..." );
 	    
-	    $scope.gotoPaymentInfo = function() {
-		$location.path( '/payment_info' );
-	    };
+            $scope.gotoPaymentInfo = function() {
+                $location.path( '/payment_info' );
+            };
 	    
-	}]);
+        }
+    ]);
 
 })(window, window.angular);
 

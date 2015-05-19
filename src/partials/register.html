@@ -8,20 +8,20 @@
       <h4>Step 1 of 3</h4>
       <p>Register</p>
       <div class="form-group">
-	<label for="email_address">Email Address</label>
-	<input type="email" class="form-control" id="email_address" placeholder="Enter Email Address">
+	    <label for="email_address">Email Address</label>
+        <input type="email" class="form-control" ng-model="user.email_address" placeholder="Enter Email Address">
       </div>
       <div class="form-group">
-	<label for="password">Password</label>
-	<input type="password" class="form-control" id="password" placeholder="Password">
+        <label for="password">Password</label>
+        <input type="password" class="form-control" ng-model="user.password" placeholder="Password">
       </div>
       <div class="form-group">
-	<label for="repeat_password">Repeat Password</label>
-	<input type="password" class="form-control" id="repeat_password" placeholder="Repeat Password">
+        <label for="repeat_password">Repeat Password</label>
+        <input type="password" class="form-control" ng-model="user.repeat_password" placeholder="Repeat Password">
       </div>
       <button type="submit" class="btn btn-primary btn-lg col-xs-12 col-sm-12 col-md-12"
-	      ng-click="gotoPersonalInfo()">
-	Go to Personal Information
+              ng-click="insertUser()">
+        Go to Personal Information
       </button>
     </form>
   </div>

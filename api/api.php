@@ -12,14 +12,17 @@ function main() {
 
     LogUtil::logObj( "INPUT: ", $input );
     switch ( $action ) {
+    case 'insertUser':
+        $res = insertUser( $db, $input );
+        break;
+    case 'pharmacyList':
+        $res = pharmacyList( $db, $input );
+        break;
     case 'requestInviteCode':
         $res = requestInviteCode( $db, $input );
         break;
     case 'validateInviteCode':
         $res = validateInviteCode( $db, $input );
-        break;
-    case 'pharmacyList':
-        $res = pharmacyList( $db, $input );
         break;
     default:
         $res = [ 'error' => true, 'message' => 'Unknown API call' ];
@@ -36,7 +39,13 @@ function main() {
         $obj['events'] = $events;
     }
     */
-    header( 'Access-Control-Allow-Origin: *' );
+    if ( $res['error'] ) {
+        header( 'HTTP/1.0 403 Error: *' );
+        header( 'Access-Control-Allow-Origin: *' );
+    } else {
+        header( 'HTTP/1.0 200 OK' );
+        header( 'Access-Control-Allow-Origin: *' );
+    }
     echo( json_encode( $res ));
 }
 
@@ -74,4 +83,34 @@ function pharmacyList( $db, $input ) {
         $res     = [ 'error' => true, 'message' => 'No pharmacies found' ];
     }
     return $res;
+}
+
+function insertUser( $db, $input ) {
+    $user        = $db->user;
+    $usr         = $input;
+    $usr['email_address'] = strtolower( $usr['email_address'] );
+    $testUser    = $user->findOne( ['email_address' => $usr['email_address'] ] );
+    if ( $testUser ) {
+        return [ 'error' => true, 'message' => 'A user with this email already exists' ];
+    }
+    unset( $usr['action'] );
+    $password             = $usr['password'];
+    $usr['salt']          = generateRandomString();
+    $usr['password']      = hash( 'sha256', $password . $usr['salt'] );
+    $user->insert( $usr );
+    return $usr;
+}
+
+
+
+// Should go into Util
+
+function generateRandomString( $length = 6 ) {
+    $chars   = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $len     = strlen( $chars );
+    $randStr = '';
+    for ( $i = 0; $i < $length; $i++ ) {
+        $randStr .= $chars[rand(0, $len - 1)];
+    }
+    return $randStr;
 }
