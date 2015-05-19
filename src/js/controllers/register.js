@@ -5,14 +5,18 @@
         function( $scope, $location, $routeParams, $log, User ) {
 
             $log.log( "loaded registerCtrl ..." );
-            $scope.user = {};
+            $scope.config = {
+                isLoggedIn: User.getUserid() ? true : false,
+            };
+            $scope.user   = {};
 
             $scope.insertUser = function() {
                 var user = angular.copy( $scope.user );
                 User.insertUser( 
                     user, 
                     function( data ) {
-                        $location.path( '/personal_info' );                    
+                        User.loginUser( data );
+                        $location.path( '/personal_info' );
                     },
                     function( data ) {
                         $log.log( "Registration error" );

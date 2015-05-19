@@ -1,7 +1,7 @@
 (function (window, angular, undefined) {
 
     var healthApp = angular.module('healthApp', [
-        'ngRoute', 'ngSanitize', 'ngTouch', 'ngAnimate', // 'ui.bootstrap',
+        'ngRoute', 'ngSanitize', 'ngTouch', 'ngAnimate', 'ui.bootstrap',
         'healthControllers', 'healthServices',
     ]);
 

@@ -1,10 +1,15 @@
 (function (window, angular, undefined) {
 
     angular.module('healthControllers').controller('paymentInfoCtrl', [
-        '$scope', '$location', '$routeParams', '$log',
-        function($scope, $location, $routeParams, $log) {
+        '$scope', '$location', '$routeParams', '$log', 'User',
+        function( $scope, $location, $routeParams, $log, User ) {
 
             $log.log( "loaded paymentInfoCtrl ..." );
+            $scope.config  = {
+                isLoggedIn: User.getUserid() ? true : false,
+            };
+            $scope.user    = {};
+            $scope.user.id = User.getUserid();
 
             var handler = StripeCheckout.configure({
                 key: 'pk_test_9ZvHQY5eLRYdrAQkiMWWiSvr',

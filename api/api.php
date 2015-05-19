@@ -1,6 +1,7 @@
 <?php
 
 require_once ( dirname(__FILE__).'/LogUtil.php' );
+require_once ( dirname(__FILE__).'/Util.php' );
 
 main();
 
@@ -21,6 +22,9 @@ function main() {
     case 'requestInviteCode':
         $res = requestInviteCode( $db, $input );
         break;
+    case 'updateUser':
+        $res = updateUser( $db, $input );
+        break;
     case 'validateInviteCode':
         $res = validateInviteCode( $db, $input );
         break;
@@ -29,17 +33,7 @@ function main() {
         break;
     }
 
-    /*
-    $id       = new MongoId( $input['id'] );
-    $cursor   = $session->find( array( '_id' => $id ));
-    $obj      = array();
-    foreach ($cursor as $doc) {
-        $obj    = $doc;
-        $events = json_decode( $obj['events'] );
-        $obj['events'] = $events;
-    }
-    */
-    if ( $res['error'] ) {
+    if ( array_key_exists( 'error', $res )) {
         header( 'HTTP/1.0 403 Error: *' );
         header( 'Access-Control-Allow-Origin: *' );
     } else {
@@ -95,13 +89,29 @@ function insertUser( $db, $input ) {
     }
     unset( $usr['action'] );
     $password             = $usr['password'];
-    $usr['salt']          = generateRandomString();
+    $usr['salt']          = Util::generateRandomString();
     $usr['password']      = hash( 'sha256', $password . $usr['salt'] );
     $user->insert( $usr );
+    unset( $usr['password'] );
+    unset( $usr['salt'] );
     return $usr;
 }
 
-
+function updateUser( $db, $input ) {
+    $user        = $db->user;
+    $usr         = $input;
+    $id          = new MongoId( $input['id'] );
+    $testUser    = $user->findOne( ['_id' => $id ] );
+    if ( ! $testUser ) {
+        return [ 'error' => true, 'message' => 'No user found' ];
+    }
+    unset( $usr['id'] );
+    unset( $usr['action'] );
+    $user->update( ['_id' => $id ], [ '$set' => $usr ] );
+    unset( $usr['password'] );
+    unset( $usr['salt'] );
+    return $usr;
+}
 
 // Should go into Util
 
