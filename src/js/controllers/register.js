@@ -28,4 +28,3 @@
     ]);
 
 })(window, window.angular);
-

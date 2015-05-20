@@ -1,0 +1,13 @@
+/* Required margin for .navbar-fixed-top. Remove if using .navbar-static-top.
+   Change if height of navigation changes. */
+body {
+    margin-top: 50px;
+}
+
+.fullImage {
+    background: url('/images/1920-x-1080.jpg') no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+}

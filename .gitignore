@@ -6,3 +6,4 @@ api/rockmongo/
 api/index.php
 node_modules/
 material-start/
+stripe-php/

@@ -2,6 +2,7 @@
 
 require_once ( dirname(__FILE__).'/LogUtil.php' );
 require_once ( dirname(__FILE__).'/Util.php' );
+require_once ( dirname(__FILE__).'/stripe-php/init.php' );
 
 main();
 
@@ -13,6 +14,12 @@ function main() {
 
     LogUtil::logObj( "INPUT: ", $input );
     switch ( $action ) {
+    case 'chargeCustomer':
+        $res = chargeCustomer( $db, $input );
+        break;
+    case 'getPaymentDetails':
+        $res = getPaymentDetails( $db, $input );
+        break;
     case 'insertUser':
         $res = insertUser( $db, $input );
         break;
@@ -113,14 +120,21 @@ function updateUser( $db, $input ) {
     return $usr;
 }
 
-// Should go into Util
-
-function generateRandomString( $length = 6 ) {
-    $chars   = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    $len     = strlen( $chars );
-    $randStr = '';
-    for ( $i = 0; $i < $length; $i++ ) {
-        $randStr .= $chars[rand(0, $len - 1)];
+function getPaymentDetails( $db, $input ) {
+    $user        = $db->user;
+    $usr         = $input;
+    $id          = new MongoId( $input['id'] );
+    $testUser    = $user->findOne( ['_id' => $id ] );
+    if ( ! $testUser ) {
+        return [ 'error' => true, 'message' => 'No user found' ];
     }
-    return $randStr;
+    if ( array_key_exists( 'payment_details', $testUser )) {
+        return $testUser['payment_details'];
+    } else {
+        return [];
+    }
+}
+
+function chargeCustomer( $db, $input ) {
+ 
 }

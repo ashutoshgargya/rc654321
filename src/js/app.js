@@ -12,6 +12,10 @@
             // $locationProvider.hashPrefix('!'); // necessary for prerendering and SEO
 
             $routeProvider
+                .when('/home', {
+                    templateUrl: 'src/partials/home.html',
+                    controller: 'homeCtrl'
+                })
                 .when('/register', {
                     templateUrl: 'src/partials/register.html',
                     controller: 'registerCtrl'
@@ -33,7 +37,7 @@
                     // controller: 'welcomeCtrl'
                 })
                 .otherwise({
-                    redirectTo: '/register'
+                    redirectTo: '/home'
                 });
         }
     ]);

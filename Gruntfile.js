@@ -48,9 +48,11 @@ module.exports = function( grunt ) {
 
         health_js_list: [
             "src/js/app.js",
+            "src/js/modules.js",
             "src/js/services/user.js",
             "src/js/services/cookie.js",
             "src/js/services/browser.js",
+            "src/js/controllers/home.js",
             "src/js/controllers/welcome.js",
             "src/js/controllers/register.js",
             "src/js/controllers/personalInfo.js",
@@ -74,6 +76,7 @@ module.exports = function( grunt ) {
 
         health_css_list: [
             "src/css/bootstrap.min.css",
+            "src/css/full.css",
         ],
 
         now: (new Date()).getTime()

@@ -1,7 +1,5 @@
 (function (window, angular, undefined) {
 
-    angular.module( 'healthControllers', [] );
-
     angular.module('healthControllers').controller('welcomeCtrl', [
         '$scope', '$location', '$routeParams', '$log',
         function($scope, $location, $routeParams, $log) {
