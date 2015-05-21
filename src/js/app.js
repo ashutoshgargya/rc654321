@@ -2,7 +2,7 @@
 
     var healthApp = angular.module('healthApp', [
         'ngRoute', 'ngSanitize', 'ngTouch', 'ngAnimate', 'ui.bootstrap',
-        'healthControllers', 'healthServices',
+        'healthControllers', 'healthServices', 'healthDirectives',
     ]);
 
     healthApp.config([
@@ -15,6 +15,10 @@
                 .when('/home', {
                     templateUrl: 'src/partials/home.html',
                     controller: 'homeCtrl'
+                })
+                .when('/login', {
+                    templateUrl: 'src/partials/login.html',
+                    controller: 'loginCtrl'
                 })
                 .when('/register', {
                     templateUrl: 'src/partials/register.html',

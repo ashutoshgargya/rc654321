@@ -17,6 +17,10 @@
                     return "";
                 }
             };
+
+            this.deleteCookie = function( key ) {
+                $.removeCookie( key, { path: '/' } );
+            };
         }
     ]);
 })(window, window.angular);

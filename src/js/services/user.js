@@ -6,6 +6,35 @@
 
             var that = this;
 
+            this.authUser = function( user, success, failure ) {
+                if ( ! user.email_address ) {
+                    bootbox.alert( "Please enter an email address." );
+                    return;
+                }
+                if ( ! user.password ) {
+                    bootbox.alert( "Please enter a password." );
+                    return;
+                }
+
+                // Data looks good, attempt to auth
+                var url     = 'https://www.revelcare.com/api/api.php';
+                user.action = 'authUser';
+                $http({
+                    method: 'POST',
+                    url: url,
+                    data: $.param( user ),
+                    headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+                }).success( function( data, status, headers, config ) {
+                    if ( angular.isFunction( success )) {
+                        success( data );
+                    }
+                }).error( function( data, status, headers, config ) {
+                    if ( angular.isFunction( failure )) {
+                        failure( data );
+                    }
+                });
+            };
+
             this.insertUser = function( user, success, failure ) {
                 if ( ! user.email_address ) {
                     bootbox.alert( "Please enter an email address." );
@@ -81,10 +110,51 @@
                     }
                 });
             };
+            
+            // Same as updateUserToServer, but server needs to know to create Stripe customer
+            this.createStripeCustomer = function( user, success, failure ) {
+                // Data looks good, attempt to update
+                var url     = 'https://www.revelcare.com/api/api.php';
+                user.action = 'createStripeCustomer';
+                $http({
+                    method: 'POST',
+                    url: url,
+                    data: $.param( user ),
+                    headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+                }).success( function( data, status, headers, config ) {
+                    if ( angular.isFunction( success )) {
+                        success( data );
+                    }
+                }).error( function( data, status, headers, config ) {
+                    $log.log( "Error Data: ", data );
+                    if ( angular.isFunction( failure )) {
+                        failure( data );
+                    }
+                });
+            };
 
             this.getPaymentDetails = function( user, success, failure ) {
                 var url     = 'https://www.revelcare.com/api/api.php';
                 user.action = 'getPaymentDetails';
+                $http({
+                    method: 'POST',
+                    url: url,
+                    data: $.param( user ),
+                    headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+                }).success( function( data, status, headers, config ) {
+                    if ( angular.isFunction( success )) {
+                        success( data );
+                    }
+                }).error( function( data, status, headers, config ) {
+                    if ( angular.isFunction( failure )) {
+                        failure( data );
+                    }
+                });
+            };
+
+            this.chargeCustomer = function( user, success, failure ) {
+                var url     = 'https://www.revelcare.com/api/api.php';
+                user.action = 'chargeCustomer';
                 $http({
                     method: 'POST',
                     url: url,
@@ -106,6 +176,10 @@
                 if ( id ) {
                     Cookie.setCookie( 'id', id );
                 }
+            };
+
+            this.logoutUser = function() {
+                Cookie.deleteCookie( 'id' );
             };
 
             this.getUserid = function() {

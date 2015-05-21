@@ -12,10 +12,18 @@ function main() {
     $input    = array_merge( $_POST, $_GET );
     $action   = $input['action'];
 
+    \Stripe\Stripe::setApiKey("sk_test_BQokikJOvBiI2HlWgH4olfQ2");
+
     LogUtil::logObj( "INPUT: ", $input );
     switch ( $action ) {
+    case 'authUser':
+        $res = authUser( $db, $input );
+        break;
     case 'chargeCustomer':
         $res = chargeCustomer( $db, $input );
+        break;
+    case 'createStripeCustomer':
+        $res = createStripeCustomer( $db, $input );
         break;
     case 'getPaymentDetails':
         $res = getPaymentDetails( $db, $input );
@@ -86,6 +94,27 @@ function pharmacyList( $db, $input ) {
     return $res;
 }
 
+function authUser( $db, $input ) {
+    $user        = $db->user;
+    $usr         = $input;
+    $usr['email_address'] = strtolower( $usr['email_address'] );
+    $testUser    = $user->findOne( ['email_address' => $usr['email_address'] ] );
+    if ( ! $testUser ) {
+        return [ 'error' => true, 'message' => 'No user exists with this email address' ];
+    }
+    unset( $usr['action'] );
+    $password             = $usr['password'];
+    $salt                 = $testUser['salt'];
+    $thash                = hash( 'sha256', $password . $salt );
+    if ( $thash === $testUser['password'] ) {
+        unset( $testUser['password'] );
+        unset( $testUser['salt'] );
+        return $testUser;
+    } else {
+        return [ 'error' => true, 'message' => 'Sorry wrong password' ];
+    }
+}
+
 function insertUser( $db, $input ) {
     $user        = $db->user;
     $usr         = $input;
@@ -120,6 +149,29 @@ function updateUser( $db, $input ) {
     return $usr;
 }
 
+function createStripeCustomer( $db, $input ) {
+    $user        = $db->user;
+    $usr         = $input;
+    $id          = new MongoId( $input['id'] );
+    $testUser    = $user->findOne( ['_id' => $id ] );
+    if ( ! $testUser ) {
+        return [ 'error' => true, 'message' => 'No user found' ];
+    }
+    // Create a Customer
+    $customer    = \Stripe\Customer::create( [
+        "source" => $usr['payment_details']['id'],
+        "description" => "Customer " . $input['id']
+    ]);
+    // Set customer token for future charges
+    $usr['payment_details']['customer_id'] = $customer->id;
+    unset( $usr['id'] );
+    unset( $usr['action'] );
+    $user->update( ['_id' => $id ], [ '$set' => $usr ] );
+    unset( $usr['password'] );
+    unset( $usr['salt'] );
+    return $usr;
+}
+
 function getPaymentDetails( $db, $input ) {
     $user        = $db->user;
     $usr         = $input;
@@ -136,5 +188,31 @@ function getPaymentDetails( $db, $input ) {
 }
 
 function chargeCustomer( $db, $input ) {
- 
+    $user        = $db->user;
+    $usr         = $input;
+    $id          = new MongoId( $input['id'] );
+    $testUser    = $user->findOne( ['_id' => $id ] );
+    if ( ! $testUser ) {
+        return [ 'error' => true, 'message' => 'No user found' ];
+    }
+    if ( array_key_exists( 'payment_details', $testUser )) {
+        $payment_details = $testUser['payment_details'];
+        if ( array_key_exists( 'customer_id', $payment_details )) {
+            try {
+                \Stripe\Charge::create([
+                    "amount"   => 1000, # $10.00 this time
+                    "currency" => "usd",
+                    "customer" => $payment_details['customer_id']
+                ]);
+            } catch( \Stripe\Error\Card $e ) {
+                // The card was declined
+                return [ 'error' => true, message => 'Your credit card was declined', details => $e ];
+            }
+            return [ 'id' => $input['id'], 'amount' => 10.00 ];
+        } else {
+            return [ 'error' => true, 'message' => 'No customer ID found' ];
+        }
+    } else {
+        return [ 'error' => true, 'message' => 'We could not find a credit card to charge' ];
+    }
 }

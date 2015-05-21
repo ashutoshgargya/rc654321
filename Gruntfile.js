@@ -53,10 +53,12 @@ module.exports = function( grunt ) {
             "src/js/services/cookie.js",
             "src/js/services/browser.js",
             "src/js/controllers/home.js",
-            "src/js/controllers/welcome.js",
-            "src/js/controllers/register.js",
-            "src/js/controllers/personalInfo.js",
+            "src/js/controllers/login.js",
             "src/js/controllers/paymentInfo.js",
+            "src/js/controllers/personalInfo.js",
+            "src/js/controllers/register.js",
+            "src/js/controllers/welcome.js",
+            "src/js/directives/header.js",
         ],
 
         vendor_health_js_list: [

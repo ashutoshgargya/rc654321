@@ -5,9 +5,9 @@
         function( $scope, $location, $routeParams, $log, User ) {
 
             $log.log( "loaded homeCtrl ..." );
-            $scope.config = {
-                isLoggedIn: User.getUserid() ? true : false,
-            };
+            // $scope.config = {
+            // isLoggedIn: User.getUserid() ? true : false,
+            // };
             $scope.user   = {};
 
 	    }
