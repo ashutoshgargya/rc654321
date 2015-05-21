@@ -56,6 +56,7 @@ module.exports = function( grunt ) {
             "src/js/controllers/login.js",
             "src/js/controllers/paymentInfo.js",
             "src/js/controllers/personalInfo.js",
+            "src/js/controllers/prescriptions.js",
             "src/js/controllers/register.js",
             "src/js/controllers/welcome.js",
             "src/js/directives/header.js",
@@ -77,7 +78,7 @@ module.exports = function( grunt ) {
         ],
 
         health_css_list: [
-            "src/css/bootstrap.min.css",
+            "src/css/bootstrap.css",
             "src/css/full.css",
         ],
 

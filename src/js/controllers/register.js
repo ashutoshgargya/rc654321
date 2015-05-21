@@ -5,10 +5,7 @@
         function( $scope, $location, $routeParams, $log, User ) {
 
             $log.log( "loaded registerCtrl ..." );
-            $scope.config = {
-                isLoggedIn: User.getUserid() ? true : false,
-            };
-            $scope.user   = {};
+            $scope.user = {};
 
             $scope.insertUser = function() {
                 var user = angular.copy( $scope.user );

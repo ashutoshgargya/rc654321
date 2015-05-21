@@ -18,6 +18,9 @@
                                </div>
                                <div class="navbar-collapse collapse" id="navbar-main">
                                  <ul class="nav navbar-nav navbar-right">
+                                   <li ng-if="config.isLoggedIn" style="cursor: pointer">
+                                     <a href="#/prescriptions">Prescriptions</a>
+                                   </li>
                                    <li ng-if="config.isLoggedIn" ng-click="logout()" style="cursor: pointer">
                                      <a>Logout</a>
                                    </li>

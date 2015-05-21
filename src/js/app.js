@@ -32,6 +32,10 @@
                     templateUrl: 'src/partials/paymentInfo.html',
                     controller: 'paymentInfoCtrl'
                 })
+                .when('/prescriptions', {
+                    templateUrl: 'src/partials/prescriptions.html',
+                    controller: 'prescriptionsCtrl'
+                })
                 .when('/welcome', {
                     templateUrl: 'src/partials/welcome.html',
                     controller: 'welcomeCtrl'
