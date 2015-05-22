@@ -2,16 +2,19 @@ API Calls
 =========
 
 Insert a User: API call to register/insert a user
+-------------------------------------------------
 
 `POST /api/api.php?action=insertUser`
 
 Request:
+
  *Field* | *Type* | *Description* 
  --- | --- | ---
  email_address | String | Email address of user 
  password | String | Alphanumeric password 
 
 Response (Success - http code 200):
+
  *Field* | *Type* | *Description* 
  --- | --- | ---
  id | String | Unique ID of user 
@@ -19,6 +22,7 @@ Response (Success - http code 200):
  other_field | Unknown | Any other fields (except password) 
 
 Response (Failure - http code 403):
+
  *Field* | *Type* | *Description* 
  --- | --- | ---
  error | Bool | true 
@@ -27,6 +31,44 @@ Response (Failure - http code 403):
 Example:
 
     $ curl --data "email_address=bingo1@gmail.com&password=secret" https://www.revelcare.com/api/api.php?action=insertUser
+
+    {
+        "_id": { "$id": "55599c61af1dd17d038b4567" },
+        "email_address": "bingo1@gmail.com",
+    }
+
+======
+
+Authenticate a User: API call to authenticate a user
+----------------------------------------------------
+
+`POST /api/api.php?action=authUser`
+
+Request:
+
+ *Field* | *Type* | *Description* 
+ --- | --- | ---
+ email_address | String | Email address of user 
+ password | String | Alphanumeric password 
+
+Response (Success - http code 200):
+
+ *Field* | *Type* | *Description* 
+ --- | --- | ---
+ id | String | Unique ID of user 
+ email_address | String | Email address of user 
+ other_field | Unknown | Any other fields (except password) 
+
+Response (Failure - http code 403):
+
+ *Field* | *Type* | *Description* 
+ --- | --- | ---
+ error | Bool | true 
+ message | String | Descriptive message for display 
+
+Example:
+
+    $ curl --data "email_address=bingo1@gmail.com&password=secret" https://www.revelcare.com/api/api.php?action=authUser
 
     {
         "_id": { "$id": "55599c61af1dd17d038b4567" },
