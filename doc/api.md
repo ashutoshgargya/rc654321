@@ -37,7 +37,6 @@ Example:
         "email_address": "bingo1@gmail.com",
     }
 
-======
 
 Authenticate a User: API call to authenticate a user
 ----------------------------------------------------
@@ -75,13 +74,23 @@ Example:
         "email_address": "bingo1@gmail.com",
     }
 
-======
 
 Request Invite Code: API call to request an invite code
+-------------------------------------------------------
 
 `GET /api/api.php?action=requestInviteCode`
 
-The server will always respond with a 200.
+Request:
+
+ *Field* | *Type* | *Description* 
+ --- | --- | ---
+
+Response (Success - http code 200):
+
+ *Field* | *Type* | *Description* 
+ --- | --- | ---
+ id | String | Unique ID of invite code 
+ code | String | Invite code 
 
 Example:
 
@@ -92,11 +101,32 @@ Example:
         "code": "REVELNOW",
     }
 
-======
 
 Validate Invite Code: API call to make sure an invite code is valid
+-------------------------------------------------------------------
 
 `GET /api/api.php?action=validateInviteCode&code=<code>`
+
+Request:
+
+ *Field* | *Type* | *Description* 
+ --- | --- | ---
+ code | String | Invite code to validate 
+
+Response (Success - http code 200):
+
+ *Field* | *Type* | *Description* 
+ --- | --- | ---
+ id | String | Unique ID of invite code 
+ code | String | Invite code 
+
+Response (Failure - http code 403):
+
+ *Field* | *Type* | *Description* 
+ --- | --- | ---
+ error | Bool | true 
+ message | String | Descriptive message for display 
+
 
 The server will always respond with a 200.
 
