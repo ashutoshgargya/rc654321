@@ -190,3 +190,46 @@ Example:
         "message": "Code not exist",
     }
 
+Get Pharmacy List
+-----------------
+
+`GET /api/api.php?action=pharmacyList`
+
+Request:
+
+ *Field* | *Type* | *Description* 
+ --- | --- | ---
+
+Response (Success - http code 200): (list of following objects)
+
+ *Field* | *Type* | *Description* 
+ --- | --- | ---
+ _id | Object | { "$id": "Unique ID for Pharmacy" }
+ name | String | Pharmacy Name
+ description | String | Pharmacy description
+ address | String | Pharmacy Address
+ phone | String | Pharmacy Phone
+
+Example:
+
+    $ curl -iX GET https://www.revelcare.com/api/api.php?action=pharmacyList
+
+    [
+       {
+           "_id": { "$id": "55599c61af1dd17d038b4567" },
+           "name": "CVS",
+           "description": "CVS Cupertino on De Anza Blvd",
+           "address": "10455 S De Anza Blvd Cupertino, CA 95014",
+           "phone": "4089961911",
+       },
+       {
+           "_id": { "$id": "555a220aaf1dd1440a8b4567" },
+           "name": "CVS",
+           "description": "CVS Sunnyvale on El Camino Real",
+           "address": "576 E El Camino Real Sunnyvale, CA 94087",
+           "phone": "4087394033",
+       },
+    ]
+
+
+
