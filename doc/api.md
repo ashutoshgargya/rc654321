@@ -1,8 +1,8 @@
 API Calls
 =========
 
-Insert a User: API call to register/insert a user
--------------------------------------------------
+Insert a User
+-------------
 
 `POST /api/api.php?action=insertUser`
 
@@ -38,8 +38,8 @@ Example:
     }
 
 
-Authenticate a User: API call to authenticate a user
-----------------------------------------------------
+Authenticate a User
+-------------------
 
 `POST /api/api.php?action=authUser`
 
@@ -74,9 +74,52 @@ Example:
         "email_address": "bingo1@gmail.com",
     }
 
+Save Patient Details
+--------------------
 
-Request Invite Code: API call to request an invite code
--------------------------------------------------------
+`POST /api/api.php?action=updateUser`
+
+Request:
+
+ *Field* | *Type* | *Description* 
+ --- | --- | ---
+ id | String | Unique ID of user 
+ field1 | Unknown | Field in details
+ field2 | Unknown | Field in patient details
+
+Response (Success - http code 200):
+
+ *Field* | *Type* | *Description* 
+ --- | --- | ---
+ id | String | Unique ID of user 
+ email_address | String | Email address of user 
+ field1 | Unknown | Other field (except password) 
+ field2 | Unknown | Other field (except password) 
+
+Response (Failure - http code 403):
+
+ *Field* | *Type* | *Description* 
+ --- | --- | ---
+ error | Bool | true 
+ message | String | Descriptive message for display 
+
+Example:
+
+    $ curl --data "id=55599c61af1dd17d038b4567&name=Test+User1&dob=01/01/1980&allergies=peanuts" https://www.revelcare.com/api/api.php?action=updateUser
+
+    {
+        "_id": { "$id": "55599c61af1dd17d038b4567" },
+        "email_address": "bingo1@gmail.com",
+        "name": "Test User1",
+        "dob": "01/01/1980",
+        "allergies": "Peanuts",
+        "field1": "field1 data here",
+        "field2": "field2 data here",
+    }
+
+
+Request Invite Code
+-------------------
 
 `GET /api/api.php?action=requestInviteCode`
 
@@ -102,8 +145,8 @@ Example:
     }
 
 
-Validate Invite Code: API call to make sure an invite code is valid
--------------------------------------------------------------------
+Validate Invite Code
+--------------------
 
 `GET /api/api.php?action=validateInviteCode&code=<code>`
 
@@ -146,3 +189,4 @@ Example:
         "error": true,
         "message": "Code not exist",
     }
+
