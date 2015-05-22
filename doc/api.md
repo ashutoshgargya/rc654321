@@ -5,21 +5,21 @@ Insert a User: API call to register/insert a user
 
 `POST /api/api.php?action=insertUser`
 
-Fields:
-|Field|Type|Description|
-|email_address|String|Email address of user|
-|password|String|Alphanumeric password|
+Request:
+| *Field* | *Type* | *Description* |
+| email_address | String | Email address of user |
+| password | String | Alphanumeric password |
 
-Return (Success - http code 200):
-|Field|Type|Description|
-|id|String|Unique ID of user|
-|email_address|String|Email address of user|
-|other_field|Unknown|Any other fields (except password that user has)|
+Response (Success - http code 200):
+| *Field* | *Type* | *Description* |
+| id | String | Unique ID of user |
+| email_address | String | Email address of user |
+| other_field | Unknown | Any other fields (except password) |
 
-Return (Failure - http code 403):
-|Field|Type|Description|
-|error|Bool|true|
-|message|String|Descriptive message for display|
+Response (Failure - http code 403):
+| *Field* | *Type* | *Description* |
+| error | Bool | true |
+| message | String | Descriptive message for display |
 
 Example:
 
