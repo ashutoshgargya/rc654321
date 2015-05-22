@@ -6,14 +6,12 @@ Insert a User: API call to register/insert a user
 `POST /api/api.php?action=insertUser`
 
 Request:
-
  *Field* | *Type* | *Description* 
  --- | --- | ---
  email_address | String | Email address of user 
  password | String | Alphanumeric password 
 
 Response (Success - http code 200):
-
  *Field* | *Type* | *Description* 
  --- | --- | ---
  id | String | Unique ID of user 
@@ -21,7 +19,6 @@ Response (Success - http code 200):
  other_field | Unknown | Any other fields (except password) 
 
 Response (Failure - http code 403):
-
  *Field* | *Type* | *Description* 
  --- | --- | ---
  error | Bool | true 
