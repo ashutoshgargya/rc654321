@@ -9,12 +9,14 @@ main();
 function main() {
     $m        = new MongoClient( "mongodb://localhost" );
     $db       = $m->revelcare;
+    $grid     = $db->getGridFS();
     $input    = array_merge( $_POST, $_GET );
     $action   = $input['action'];
 
     \Stripe\Stripe::setApiKey("sk_test_BQokikJOvBiI2HlWgH4olfQ2");
 
     LogUtil::logObj( "INPUT: ", $input );
+    LogUtil::logObj( "FILE: ", $_FILES );
     switch ( $action ) {
     case 'authUser':
         $res = authUser( $db, $input );
@@ -25,8 +27,14 @@ function main() {
     case 'createStripeCustomer':
         $res = createStripeCustomer( $db, $input );
         break;
+    case 'getContacts':
+        $res = getContacts( $db, $input );
+        break;
     case 'getPaymentDetails':
         $res = getPaymentDetails( $db, $input );
+        break;
+    case 'insertContact':
+        $res = insertContact( $db, $input );
         break;
     case 'insertUser':
         $res = insertUser( $db, $input );
@@ -39,6 +47,9 @@ function main() {
         break;
     case 'updateUser':
         $res = updateUser( $db, $input );
+        break;
+    case 'updateInsuranceDetails':
+        $res = updateInsuranceDetails( $db, $input, $grid );
         break;
     case 'validateInviteCode':
         $res = validateInviteCode( $db, $input );
@@ -147,6 +158,62 @@ function updateUser( $db, $input ) {
     unset( $usr['password'] );
     unset( $usr['salt'] );
     return $usr;
+}
+
+function insertContact( $db, $input ) {
+    $user        = $db->user;
+    $usr         = $input;
+    $id          = new MongoId( $input['id'] );
+    $testUser    = $user->findOne( ['_id' => $id ] );
+    if ( ! $testUser ) {
+        return [ 'error' => true, 'message' => 'No user found' ];
+    }
+    unset( $usr['id'] );
+    unset( $usr['action'] );
+    if ( array_key_exists( 'contact', $usr )) {
+        $user->update( ['_id' => $id ], [ '$push' => [ 'contacts' => $usr['contact']] ] );
+    }
+    unset( $testUser['password'] );
+    unset( $testUser['salt'] );
+    return $testUser;
+}
+
+function getContacts( $db, $input ) {
+    $user        = $db->user;
+    $usr         = $input;
+    $id          = new MongoId( $input['id'] );
+    $testUser    = $user->findOne( ['_id' => $id ] );
+    if ( ! $testUser ) {
+        return [ 'error' => true, 'message' => 'No user found' ];
+    }
+    if ( array_key_exists( 'contacts', $testUser )) {
+        return $testUser['contacts'];
+    } else {
+        return [];
+    }
+}
+
+function updateInsuranceDetails( $db, $input, $grid ) {
+    $user        = $db->user;
+    $usr         = $input;
+    $fileid      = $grid->storeUpload('insurance_pic', [ 'contentType' => 'image/jpeg' ]);
+    // $gridFile    = $grid->get( $id );
+
+    // LogUtil::logObj( "IMAGE: ", $gridfsFile->file );
+    /*
+    $id          = new MongoId( $input['id'] );
+    $testUser    = $user->findOne( ['_id' => $id ] );
+    if ( ! $testUser ) {
+        return [ 'error' => true, 'message' => 'No user found' ];
+    }
+    unset( $usr['id'] );
+    unset( $usr['action'] );
+    $user->update( ['_id' => $id ], [ '$set' => $usr ] );
+    unset( $usr['password'] );
+    unset( $usr['salt'] );
+    return $usr;
+    */
+    return [];
 }
 
 function createStripeCustomer( $db, $input ) {
