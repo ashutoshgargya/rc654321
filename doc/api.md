@@ -117,6 +117,64 @@ Example:
         "field2": "field2 data here",
     }
 
+Insert a Contact for a User
+---------------------------
+
+`POST /api/api.php?action=insertContact`
+
+Request:
+
+ *Field* | *Type* | *Description* 
+ --- | --- | ---
+ id | String | Unique ID of user 
+ contact | String | User Contact + Details
+
+Response (Success - http code 200):
+
+ *Field* | *Type* | *Description* 
+ --- | --- | ---
+ id | String | Unique ID of user 
+ other_field | Unknown | Any other fields (except password) 
+
+Example:
+
+    $ curl --data "id=555f57beaf1dd129448b4568&contact=Dr+Scooby+Doo,4086661212" https://www.revelcare.com/api/api.php?action=insertContact
+
+    {
+        "_id": {"$id":"555f57beaf1dd129448b4568"},
+        "email_address":"abc@gmailsef.com",
+        "full_name":"adwa wa",
+        "phone_number":"1112221111",
+        "dob": "Tue Jan 01 1980 00:00:00 GMT-0800 (PST)",
+        "contacts":["Dr Doogie Howser,4085551111","Dr Scooby Doo,4086661212"]
+    }
+
+Get Contacts for a User
+-----------------------
+
+`POST /api/api.php?action=getContacts`
+
+Request:
+
+ *Field* | *Type* | *Description* 
+ --- | --- | ---
+ id | String | Unique ID of user 
+
+Response (Success - http code 200): (list of the following objects)
+
+ *Field* | *Type* | *Description* 
+ --- | --- | ---
+ id | String | Unique ID of user 
+ other_field | Unknown | Any other fields (except password) 
+
+Example:
+
+    $ curl --data "id=555f57beaf1dd129448b4568" https://www.revelcare.com/api/api.php?action=getContacts
+
+    [
+        "Dr Doogie Howser,4085551111",
+        "Dr Scooby Doo,4086661212"
+    ]
 
 Request Invite Code
 -------------------
