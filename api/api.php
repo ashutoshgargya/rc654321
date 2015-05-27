@@ -129,18 +129,25 @@ function authUser( $db, $input ) {
 function insertUser( $db, $input ) {
     $user        = $db->user;
     $usr         = $input;
+    if ( ! array_key_exists( 'email_address', $usr )) {
+        return [ 'error' => true, 'message' => 'An email must be specified' ];
+    }
     $usr['email_address'] = strtolower( $usr['email_address'] );
     $testUser    = $user->findOne( ['email_address' => $usr['email_address'] ] );
     if ( $testUser ) {
         return [ 'error' => true, 'message' => 'A user with this email already exists' ];
     }
     unset( $usr['action'] );
-    $password             = $usr['password'];
-    $usr['salt']          = Util::generateRandomString();
-    $usr['password']      = hash( 'sha256', $password . $usr['salt'] );
+    if ( array_key_exists( 'password', $usr )) {
+        $password             = $usr['password'];
+        $usr['salt']          = Util::generateRandomString();
+        $usr['password']      = hash( 'sha256', $password . $usr['salt'] );
+    }
     $user->insert( $usr );
-    unset( $usr['password'] );
-    unset( $usr['salt'] );
+    if ( array_key_exists( 'password', $usr )) {
+        unset( $usr['password'] );
+        unset( $usr['salt'] );
+    }
     return $usr;
 }
 
@@ -154,6 +161,11 @@ function updateUser( $db, $input ) {
     }
     unset( $usr['id'] );
     unset( $usr['action'] );
+    if ( array_key_exists( 'password', $usr )) {
+        $password             = $usr['password'];
+        $usr['salt']          = Util::generateRandomString();
+        $usr['password']      = hash( 'sha256', $password . $usr['salt'] );
+    }
     $user->update( ['_id' => $id ], [ '$set' => $usr ] );
     unset( $usr['password'] );
     unset( $usr['salt'] );
