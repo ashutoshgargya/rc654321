@@ -117,6 +117,47 @@ Example:
         "field2": "field2 data here",
     }
 
+Save Insurance Details
+----------------------
+
+`POST /api/api.php?action=updateInsuranceDetails`
+
+Request: (this needs to be a multi-part MIME request)
+
+ *Field* | *Type* | *Description* 
+ --- | --- | ---
+ id | String | Unique ID of user 
+ filedata | binary blob | Uploaded file (image of insurance card)
+
+Response (Success - http code 200):
+
+ *Field* | *Type* | *Description* 
+ --- | --- | ---
+ id | String | Unique ID of user 
+ email_address | String | Email address of user 
+ insurance_fileid | String | Unique fileid of uploaded file
+ field1 | Unknown | Other field (except password) 
+ field2 | Unknown | Other field (except password) 
+
+Response (Failure - http code 403):
+
+ *Field* | *Type* | *Description* 
+ --- | --- | ---
+ error | Bool | true 
+ message | String | Descriptive message for display 
+
+Example:
+
+    $ curl -F filedata=@insurance_card.png -F "id=55645a99af1dd127448b4567"  https://www.revelcare.com/api/api.php?action=updateInsuranceDetails
+
+    {
+        "_id": { "$id": "55645a99af1dd127448b4567" },
+        "email_address": "bingo1@gmail.com",
+        "name": "Test User1",
+        "dob": "01/01/1980",
+        "insurance_fileid": "5566520baf1dd1c7448b456a",
+    }
+
 Insert a Contact for a User
 ---------------------------
 

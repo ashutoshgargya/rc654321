@@ -1,6 +1,7 @@
 # Build, Archive directory
 index.html
 build/
+tmp/
 js/archive/
 api/rockmongo/
 api/index.php

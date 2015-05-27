@@ -208,11 +208,8 @@ function getContacts( $db, $input ) {
 function updateInsuranceDetails( $db, $input, $grid ) {
     $user        = $db->user;
     $usr         = $input;
-    $fileid      = $grid->storeUpload('insurance_pic', [ 'contentType' => 'image/jpeg' ]);
-    // $gridFile    = $grid->get( $id );
+    $path        = $_SERVER['DOCUMENT_ROOT'] . "/tmp";
 
-    // LogUtil::logObj( "IMAGE: ", $gridfsFile->file );
-    /*
     $id          = new MongoId( $input['id'] );
     $testUser    = $user->findOne( ['_id' => $id ] );
     if ( ! $testUser ) {
@@ -220,12 +217,22 @@ function updateInsuranceDetails( $db, $input, $grid ) {
     }
     unset( $usr['id'] );
     unset( $usr['action'] );
-    $user->update( ['_id' => $id ], [ '$set' => $usr ] );
-    unset( $usr['password'] );
-    unset( $usr['salt'] );
-    return $usr;
-    */
-    return [];
+
+    LogUtil::logObj( "files: ", $_FILES );
+    if ( isset($_FILES['filedata']) and ! $_FILES['filedata']['error'] ) {
+        // move file from tmp storage
+        if ( file_exists( "$path/tmp.png" )) {
+            unlink( "$path/tmp.png" );
+        }
+        move_uploaded_file( $_FILES['filedata']['tmp_name'], "$path/tmp.png" );
+        $fileid  = $grid->storeFile( "$path/tmp.png", [ 'date' => new MongoDate() ]);
+        $usr['insurance_fileid']      = (string) $fileid;
+        $testUser['insurance_fileid'] = (string) $fileid;
+        $user->update( ['_id' => $id ], [ '$set' => $usr ] );
+    }
+    unset( $testUser['password'] );
+    unset( $testUser['salt'] );
+    return $testUser;
 }
 
 function createStripeCustomer( $db, $input ) {
