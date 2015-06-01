@@ -30,11 +30,17 @@ function main() {
     case 'getContacts':
         $res = getContacts( $db, $input );
         break;
+    case 'getPickups':
+        $res = getPickups( $db, $input );
+        break;
     case 'getPaymentDetails':
         $res = getPaymentDetails( $db, $input );
         break;
     case 'insertContact':
         $res = insertContact( $db, $input );
+        break;
+    case 'insertPickup':
+        $res = insertPickup( $db, $input );
         break;
     case 'insertUser':
         $res = insertUser( $db, $input );
@@ -203,6 +209,44 @@ function getContacts( $db, $input ) {
     } else {
         return [];
     }
+}
+
+function getPickups( $db, $input ) {
+    $pickup      = $db->pickup;
+    $pick        = $input;
+    if ( ! array_key_exists( 'userid', $pick )) {
+        return [ 'error' => true, 'message' => 'No user found' ];
+    }
+    $res         = [];
+    $cursor      = $pickup->find( [ 'userid' => $pick['userid'] ] );
+    foreach ( $cursor as $doc ) {
+        $res[]   = $doc;
+    }
+    if ( count( $res ) <= 0 ) {
+        $res     = [ 'error' => true, 'message' => 'No pickups found' ];
+    }
+    return $res;
+}
+
+function insertPickup( $db, $input ) {
+    $pickup      = $db->pickup;
+    $user        = $db->user;
+    $pick        = $input;
+    $userid      = new MongoId( $input['userid'] );
+    $testUser    = $user->findOne( ['_id' => $userid ] );
+    if ( ! $testUser ) {
+        return [ 'error' => true, 'message' => 'No user found' ];
+    }
+    if ( ! array_key_exists( 'pickup_time', $pick )) {
+        return [ 'error' => true, 'message' => 'No pickup time specified' ];
+    }
+    if ( strtotime( $pick['pickup_time'] ) === false ) {
+        return [ 'error' => true, 'message' => 'Pickup time is invalid' ];
+    }
+    $pick['pickup_time'] = new MongoDate( strtotime( $pick['pickup_time'] ));
+    unset( $pick['action'] );
+    $pickup->insert( $pick );
+    return $pick;
 }
 
 function updateInsuranceDetails( $db, $input, $grid ) {
