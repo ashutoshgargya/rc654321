@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <TextView
+        android:id="@+id/textView_prescription"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/gray_bg"
+        android:padding="@dimen/dim_10"
+        android:text="@string/prescripition_header" />
+
+    <Button
+        android:id="@+id/btn_nxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="33dp"
+        android:text="Next" />
+
+    <ScrollView
+        android:id="@+id/scrollView1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView_prescription"
+        android:layout_centerHorizontal="true" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:id="@+id/linearLayout1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="10"
+                android:layout_below="@+id/textView1"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal" >
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/btn_nxt"
+                    android:layout_alignParentTop="true"
+                    android:layout_weight="3"
+                    android:gravity="center" >
+
+                    <TextView
+                        android:id="@+id/textView2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="Today" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_weight="7"
+                    android:orientation="vertical" >
+
+                    <RadioButton
+                        android:id="@+id/rd_btn_lunch"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="12:00PM-3:00PM" />
+                    <RadioButton
+                        android:id="@+id/rd_btn_evening"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="3:00PM-6:00PM" />
+                    <RadioButton
+                        android:id="@+id/rd_btn_nyt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="6:00PM-9:00PM" />
+                    
+                </LinearLayout>
+            </LinearLayout>
+            
+              <LinearLayout
+                android:id="@+id/linearLayout1_tm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="10"
+                android:layout_marginTop="@dimen/dim_15"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal" >
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/btn_nxt"
+                    android:layout_alignParentTop="true"
+                    android:layout_weight="3"
+                    android:gravity="center" >
+
+                    <TextView
+                        android:id="@+id/textView	"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="Tommorrow" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:layout_weight="7"
+                    android:orientation="vertical" >
+                     <RadioButton
+                        android:id="@+id/rd_btn_morn_tm"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="12:00PM-3:00PM" />
+
+                    <RadioButton
+                        android:id="@+id/rd_btn_lunch_tm"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="12:00PM-3:00PM" />
+                    <RadioButton
+                        android:id="@+id/rd_btn_evening_tm"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="3:00PM-6:00PM" />
+                    <RadioButton
+                        android:id="@+id/rd_btn_nyt_tm"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="6:00PM-9:00PM" />
+                    
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>

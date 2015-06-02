@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">RevelCare</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="Welcome_to_personalized_digital_assistant">Welcome to personalized digital assistant</string>
+    <string name="Get_prescription_delivered_to_your_door">Get prescription delivered to your door</string>
+    <string name="Medication_reminders_never_forget_a_medicine">Medication reminders - never forget a medicine</string>
+    <string name="Information_related_to_your_prescription_and_symptoms">Information related to your prescription and symptoms</string>
+    <string name="All_health_related_contacts">All health related contacts</string>
+    <string name="Enter_code_to_order_pickup">Enter code to order pickup</string>
+    <string name="Request_an_invite">Request an invite</string>
+    <string name="Submit">Submit</string>
+    <string name="Invite_Request">Invite Request</string>
+    <string name="Invite_Request_msg">We are excited to hear from you. We are wprking hard to get everyone on the system. Please give us your name and email address and will send you an invite code as soom as we are able to add more capacity.</string>
+    <string name="Name">Name</string>
+    <string name="address">Address</string>
+    <string name="city">City</string>
+    <string name="DOB">Date OF Birth</string>
+    <string name="Email_Address">Email Address</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="Send_Request">Send Request</string>
+    <string name="Please_enter_prescription_pickup_information">Please enter prescription pickup information</string>
+	<string name="Pharmacy">Pharmacy</string>
+	<string name="Or_Enter_Zipcode">Or Enter Zipcode</string>
+	<string name="patient_screen_header">Please enter details for whom medicines are picked</string>
+	<string name="insurance_Screen_header">Please enter details insurance information</string>
+	<string name="insurance">Insurance</string>
+	<string name="loading_txt">Loading</string>
+	<string name="pharmacy">Pharmacy</string>
+	<string name="zipcode">Or Enter Zipcode</string>
+	<string name="name_empty">Please enter patient name</string>
+	<string name="phone_empty">Please enter patient phone number</string>
+	<string name="address_empty">Please enter patient address</string>
+	<string name="city_empty">Please enter patient city</string>
+	<string name="zip_empty">Please enter patient zipcode</string>
+	<string name="dob_empty">Please enter patient date of birthday</string>
+	<string name="prescripition_header">Please enter when your prescription to be delivered</string>
+</resources>
