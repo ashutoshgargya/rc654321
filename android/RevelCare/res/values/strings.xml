@@ -37,4 +37,8 @@
 	<string name="zip_empty">Please enter patient zipcode</string>
 	<string name="dob_empty">Please enter patient date of birthday</string>
 	<string name="prescripition_header">Please enter when your prescription to be delivered</string>
+	<string name="calling_header">Prescription Pickup Status</string>
+	<string name="enroute">person enroute</string>
+	<string name="call_to">call to talk to your care giver</string>
+	
 </resources>

@@ -23,6 +23,12 @@ public class RevelCareGlobal {
 	
 	public static String UpdateUser = Base_URL + "updateUser";
 	
+	public static String Insert_Pickup = Base_URL + "insertPickup";
+	
+	public static String InsuranceDetails =Base_URL+ "updateInsuranceDetails";
+	
+	public static String Calling_Number = "408-663-4041";
+	
 	public static void toastShow(String message, Context context) {
 		Toast display = Toast.makeText(context, message, Toast.LENGTH_SHORT);
 		display.setGravity(Gravity.CENTER, 0, 0);

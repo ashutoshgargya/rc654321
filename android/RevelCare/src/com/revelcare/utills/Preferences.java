@@ -18,6 +18,8 @@ public class Preferences {
 	
 	private static final String ID = "_id";
 	
+	private static final String IMG_PATH = "img_path";
+	
 	
 	
 	public static Preferences getInstance(final Context context) {
@@ -55,6 +57,16 @@ public class Preferences {
 		return sharedPreferences.getString(ID, null);
 	}
 	
+	public void setImg_path(final String name) {
+		System.out.println("Set Default fuel >> " + name);
+		SharedPreferences.Editor editor = sharedPreferences.edit();
+		editor.putString(IMG_PATH, name);
+		editor.commit();
+	}
 
+	public String getImg_path() {
+
+		return sharedPreferences.getString(IMG_PATH, null);
+	}
 
 }

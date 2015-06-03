@@ -15,8 +15,10 @@ import android.widget.EditText;
 
 import com.revelcare.R;
 import com.revelcare.listener.ApiResponse;
+import com.revelcare.listener.DatePickListener;
 import com.revelcare.network.NetworkUtil;
 import com.revelcare.task.UpdatePatientINFOTask;
+import com.revelcare.utills.DateIntervelPicker;
 import com.revelcare.utills.RevelCareGlobal;
 
 public class PatientInformation extends Fragment implements OnClickListener {
@@ -50,11 +52,13 @@ public class PatientInformation extends Fragment implements OnClickListener {
 		zip_editText = (EditText) getView().findViewById(R.id.editText_zipcode);
 		phone_editText = (EditText) getView().findViewById(R.id.editText_phone);
 		DOB_editText = (EditText) getView().findViewById(R.id.editText_DOB);
+		DOB_editText.setOnClickListener(this);
 		next_btn = (Button) getView().findViewById(R.id.btn_nxt);
 		next_btn.setOnClickListener(this);
 		
 	}
 
+	@SuppressLint("NewApi")
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
@@ -70,6 +74,11 @@ public class PatientInformation extends Fragment implements OnClickListener {
 				
 				}
 			}
+			break;
+			
+		case R.id.editText_DOB:
+		DateIntervelPicker dateIntervelPicker = new DateIntervelPicker(datePickListener, "nothing", "type");
+		dateIntervelPicker.show(getActivity().getFragmentManager(), "datepicker");
 			break;
 
 		}
@@ -143,6 +152,17 @@ public class PatientInformation extends Fragment implements OnClickListener {
 		@Override
 		public void onFailure() {
 			
+		}
+	};
+	
+	DatePickListener datePickListener = new DatePickListener() {
+		
+		@Override
+		public void onDateChange(int year, int monthOfYear, int dayOfMonth,
+				String typeofpicker, String type) {
+			System.out.println("year"+year+"monthOfYear"+monthOfYear+"dayOfMonth"+dayOfMonth);	
+			
+			DOB_editText.setText(dayOfMonth+"/"+monthOfYear+"/"+year);
 		}
 	};
 }

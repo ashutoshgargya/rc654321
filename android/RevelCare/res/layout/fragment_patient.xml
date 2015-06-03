@@ -64,7 +64,7 @@
                     android:layout_alignParentRight="true"
                     android:background="@drawable/white_bg"
                     android:ems="10"
-                    android:inputType="textPersonName" >
+                    android:inputType="textPostalAddress" >
 
                     <requestFocus />
                 </EditText>
@@ -134,7 +134,7 @@
                     android:layout_weight="5"
                     android:background="@drawable/white_bg"
                     android:ems="10"
-                    android:inputType="textPersonName" >
+                    android:inputType="textPhonetic" >
                 </EditText>
             </LinearLayout>
 
@@ -156,7 +156,7 @@
                     android:layout_alignParentRight="true"
                     android:background="@drawable/white_bg"
                     android:ems="10"
-                    android:inputType="textPersonName" >
+                    android:inputType="phone" >
 
                     <requestFocus />
                 </EditText>
@@ -180,6 +180,10 @@
                     android:layout_alignParentRight="true"
                     android:background="@drawable/white_bg"
                     android:ems="10"
+                    android:gravity="center_horizontal"
+                    android:focusable="false"
+                    android:hint="DD/MM/YYYY"
+                    android:focusableInTouchMode="false"
                     android:inputType="textPersonName" >
 
                     <requestFocus />

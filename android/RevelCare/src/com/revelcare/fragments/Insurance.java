@@ -26,6 +26,7 @@ import android.widget.ImageView;
 import com.revelcare.BaseActivity;
 import com.revelcare.MenuScreen;
 import com.revelcare.R;
+import com.revelcare.utills.Preferences;
 
 public class Insurance extends Fragment implements OnClickListener {
 	private ImageView insurance_front, insurance_back;
@@ -33,6 +34,7 @@ public class Insurance extends Fragment implements OnClickListener {
 	private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE_BACK = 200;
 	private Uri fileUri;
 	private Button btn_nxt;
+	private Preferences preferences;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -49,6 +51,7 @@ public class Insurance extends Fragment implements OnClickListener {
 	}
 
 	private void init() {
+		preferences = Preferences.getInstance(getActivity());
 		insurance_front = (ImageView) getView().findViewById(R.id.imageView_front);
 		insurance_back = (ImageView) getView().findViewById(R.id.imageView_back);
 		btn_nxt = (Button) getView().findViewById(R.id.btn_nxt);
@@ -120,13 +123,17 @@ public class Insurance extends Fragment implements OnClickListener {
 	
 	  
 	private void saveToLocalSDCard(Bitmap _bitmapScaled, int imagetype) {
+		
 		File f;
 		ByteArrayOutputStream bytes = new ByteArrayOutputStream();
 		_bitmapScaled.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
 		System.out.println("Environment.getExternalStorageDirectory()+ File.separator + "+Environment.getExternalStorageDirectory()+ File.separator + "front.jpg");
 		// you can create a new file name "test.jpg" in sdcard folder.
-		if(imagetype == 100)
+		if(imagetype == 100){
 			f = new File(Environment.getExternalStorageDirectory()+ File.separator + "front.jpg");
+			System.out.println("pathh"+f.getAbsolutePath());
+			preferences.setImg_path(f.getAbsolutePath());
+		}
 		else
 			f = new File(Environment.getExternalStorageDirectory()+ File.separator + "back.jpg");
 		try {
@@ -137,7 +144,6 @@ public class Insurance extends Fragment implements OnClickListener {
 			// remember close de FileOutput
 			fo.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

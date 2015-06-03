@@ -1,5 +1,6 @@
 package com.revelcare.utills;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -18,13 +19,17 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.params.HttpClientParams;
 import org.apache.http.entity.StringEntity;
+import org.apache.http.entity.mime.MultipartEntity;
+import org.apache.http.entity.mime.content.FileBody;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.params.BasicHttpParams;
 import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.params.HttpParams;
 import org.apache.http.params.HttpProtocolParams;
+import org.apache.http.protocol.BasicHttpContext;
 import org.apache.http.protocol.HTTP;
+import org.apache.http.protocol.HttpContext;
 import org.apache.http.util.EntityUtils;
 
 import android.content.Context;
@@ -248,8 +253,30 @@ public class WebserviceHandler {
 	    	return "null";
 		return "null";
 	}
-	
-	
-	
-	
+
+	public String uploadFiles(String URL, File file, Context ctx) {
+		Preferences preferences = Preferences.getInstance(context);
+		try {
+
+			HttpContext localContext = new BasicHttpContext();
+			HttpPost httpPost = new HttpPost(URL);
+			httpPost.setHeader("Content-Disposition", "multipart/form-data");
+			List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
+			nameValuePairs.add(new BasicNameValuePair("id", preferences.getID()));
+			httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+			DefaultHttpClient httpClient = getHttpClient();
+			MultipartEntity entity = new MultipartEntity();
+			entity.addPart("user_picture", new FileBody(file, "image/jpeg"));
+			httpPost.setEntity(entity);
+			HttpResponse response = httpClient.execute(httpPost, localContext);
+			String responses = EntityUtils.toString(response.getEntity());
+			System.out.println("response"+responses);
+			return responses;
+		} catch (Exception e) {
+			Log.e(e.getClass().getName(), e.getMessage(), e);
+			return null;
+		}
+
+	}
+
 }
