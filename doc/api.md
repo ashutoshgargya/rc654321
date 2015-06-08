@@ -227,7 +227,7 @@ Request:
  *Field* | *Type* | *Description* 
  --- | --- | ---
  userid | String | Unique ID of user 
- pickup_time | String | Date + Time of Scheduled Pickup
+ pickup_window | String | Delivery window
  other_data | Unknown | Any other fields
 
 Response (Success - http code 200):
@@ -236,17 +236,17 @@ Response (Success - http code 200):
  --- | --- | ---
  id | String | Unique ID of pickup
  userid | String | Unique ID of user
- pickup_time | { sec: <Double>, usec: <Double> } | { Seconds since epoch, micro-seconds }
+ pickup_window | String | Delivery window specified
  other_field | Unknown | Any other fields
 
 Example:
 
-    $ curl --data "userid=556c4791af1dd1c9448b456c&pickup_time=10+july+2015+1:00:01+PM&other_field1=some+data+here" https://www.revelcare.com/api/api.php?action=insertPickup
+    $ curl --data "userid=556c4791af1dd1c9448b456c&pickup_window=12:00-3:00&other_field1=some+data+here" https://www.revelcare.com/api/api.php?action=insertPickup
 
     {
         "_id": {"$id": "556cd73aaf1dd1c5448b4570" },
         "userid": "556c4791af1dd1c9448b456c",
-        "pickup_time": { "sec": 1436533201, "usec": 0 },
+        "pickup_window": "12:00-3:00",
         "other_field1": "some data here",
     }
 
@@ -267,7 +267,7 @@ Response (Success - http code 200): (list of the following objects)
  --- | --- | ---
  id | String | Unique ID of pickup
  userid | String | Unique ID of user
- pickup_time | { sec: <Double>, usec: <Double> } | { Seconds since epoch, micro-seconds }
+ pickup_window | String | Delivery window specified
  other_field | Unknown | Any other fields
 
 Example:
@@ -277,12 +277,12 @@ Example:
     [
         {
             "_id": { "$id": "556cd375af1dd1c7448b4574" },
-            "pickup_time": { "sec": 1436486400, "usec": 0 },
+            "pickup_window": "12:00-3:00",
             "userid": "556c4791af1dd1c9448b456c"
         },
         {
             "_id": { "$id": "556cd6d7af1dd1c9448b456e" },
-            "pickup_time": { "sec": 1436533201, "usec": 0 },
+            "pickup_window": "3:00-6:00",
             "userid": "556c4791af1dd1c9448b456c",
         }
     ]

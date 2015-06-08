@@ -237,13 +237,13 @@ function insertPickup( $db, $input ) {
     if ( ! $testUser ) {
         return [ 'error' => true, 'message' => 'No user found' ];
     }
-    if ( ! array_key_exists( 'pickup_time', $pick )) {
-        return [ 'error' => true, 'message' => 'No pickup time specified' ];
+    // if ( ! array_key_exists( 'pickup_time', $pick )) {
+    // return [ 'error' => true, 'message' => 'No pickup time specified' ];
+    // }
+    if ( array_key_exists( 'pickup_time', $pick ) && strtotime( $pick['pickup_time'] ) !== false ) {
+        // return [ 'error' => true, 'message' => 'Pickup time is invalid' ];
+        $pick['pickup_time'] = new MongoDate( strtotime( $pick['pickup_time'] ));
     }
-    if ( strtotime( $pick['pickup_time'] ) === false ) {
-        return [ 'error' => true, 'message' => 'Pickup time is invalid' ];
-    }
-    $pick['pickup_time'] = new MongoDate( strtotime( $pick['pickup_time'] ));
     unset( $pick['action'] );
     $pickup->insert( $pick );
     return $pick;
