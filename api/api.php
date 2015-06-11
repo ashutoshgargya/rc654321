@@ -30,17 +30,29 @@ function main() {
     case 'getContacts':
         $res = getContacts( $db, $input );
         break;
+    case 'getNews':
+        $res = getNews( $db, $input );
+        break;
     case 'getPickups':
         $res = getPickups( $db, $input );
         break;
     case 'getPaymentDetails':
         $res = getPaymentDetails( $db, $input );
         break;
+    case 'getPrescriptions':
+        $res = getPrescriptions( $db, $input );
+        break;
+    case 'getPrescription':
+        $res = getPrescription( $db, $input );
+        break;
     case 'insertContact':
         $res = insertContact( $db, $input );
         break;
     case 'insertPickup':
         $res = insertPickup( $db, $input );
+        break;
+    case 'insertPrescription':
+        $res = insertPrescription( $db, $input );
         break;
     case 'insertUser':
         $res = insertUser( $db, $input );
@@ -211,6 +223,20 @@ function getContacts( $db, $input ) {
     }
 }
 
+function getNews( $db, $input ) {
+    $news        = $db->news;
+    $newsQuery   = $input;
+    $res         = [];
+    $cursor      = $news->find();
+    foreach ( $cursor as $doc ) {
+        $res[]   = $doc;
+    }
+    if ( count( $res ) <= 0 ) {
+        $res     = [ 'error' => true, 'message' => 'No news found' ];
+    }
+    return $res;
+}
+
 function getPickups( $db, $input ) {
     $pickup      = $db->pickup;
     $pick        = $input;
@@ -226,6 +252,42 @@ function getPickups( $db, $input ) {
         $res     = [ 'error' => true, 'message' => 'No pickups found' ];
     }
     return $res;
+}
+
+function getPrescriptions( $db, $input ) {
+    $prescription = $db->prescription;
+    $prescr       = $input;
+    if ( ! array_key_exists( 'userid', $prescr )) {
+        return [ 'error' => true, 'message' => 'No user found' ];
+    }
+    $res          = [];
+    $cursor       = $prescription->find( [ 'userid' => $prescr['userid'] ] );
+    foreach ( $cursor as $doc ) {
+        $res[]    = $doc;
+    }
+    if ( count( $res ) <= 0 ) {
+        $res      = [ 'error' => true, 'message' => 'No prescriptions found' ];
+    }
+    return $res;
+}
+
+function getPrescription( $db, $input ) {
+    $prescription = $db->prescription;
+    $prescr       = $input;
+    if ( ! array_key_exists( 'id', $prescr )) {
+        return [ 'error' => true, 'message' => 'No prescription ID found' ];
+    }
+    try {
+        $id       = new MongoId( $prescr['id'] );
+    } catch ( MongoException $ex ) {
+        return [ 'error' => true, 'message' => 'Invalid prescription ID' ];
+    }
+    $testPrescr   = $prescription->findOne( [ '_id' => $id ] );
+    if ( $testPrescr ) {
+        return $testPrescr;
+    } else {
+        return [ 'error' => true, 'message' => 'No prescription found' ];
+    }
 }
 
 function insertPickup( $db, $input ) {
@@ -247,6 +309,20 @@ function insertPickup( $db, $input ) {
     unset( $pick['action'] );
     $pickup->insert( $pick );
     return $pick;
+}
+
+function insertPrescription( $db, $input ) {
+    $prescription = $db->prescription;
+    $user         = $db->user;
+    $prescr       = $input;
+    $userid       = new MongoId( $input['userid'] );
+    $testUser     = $user->findOne( ['_id' => $userid ] );
+    if ( ! $testUser ) {
+        return [ 'error' => true, 'message' => 'No user found' ];
+    }
+    unset( $prescr['action'] );
+    $prescription->insert( $prescr );
+    return $prescr;
 }
 
 function updateInsuranceDetails( $db, $input, $grid ) {

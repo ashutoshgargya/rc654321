@@ -287,6 +287,150 @@ Example:
         }
     ]
 
+Insert a Prescription for a User
+--------------------------------
+
+`POST /api/api.php?action=insertPrescription`
+
+Request:
+
+ *Field* | *Type* | *Description* 
+ --- | --- | ---
+ userid | String | Unique ID of user 
+ other_details1 | Unknown | Prescription Details1
+ other_details2 | Unknown | Prescription Details2
+
+Response (Success - http code 200):
+
+ *Field* | *Type* | *Description* 
+ --- | --- | ---
+ id | String | Unique ID of pickup
+ userid | String | Unique ID of user
+ other_details1 | Unknown | Prescription Details1
+ other_details2 | Unknown | Prescription Details2
+
+Example:
+
+    $ curl --data "userid=556c4791af1dd1c9448b456c&name=metformin&dosage=1+tablet+per+day&other_field1=some+data+here" https://www.revelcare.com/api/api.php?action=insertPrescription
+
+    {
+        "_id": { "$id": "55794070af1dd1f1438b4568" },
+        "userid": "556c4791af1dd1c9448b456c",
+        "name": "metformin",
+        "dosage": "1 tablet per day",
+        "other_field1": "some data here"
+    }
+
+Get Prescriptions for a User
+----------------------------
+
+`POST /api/api.php?action=getPrescriptions`
+
+Request:
+
+ *Field* | *Type* | *Description* 
+ --- | --- | ---
+ userid | String | Unique ID of user 
+
+Response (Success - http code 200): (list of the following objects)
+
+ *Field* | *Type* | *Description* 
+ --- | --- | ---
+ id | String | Unique ID of prescription
+ userid | String | Unique ID of user
+ other_field1 | Unknown | Prescriptions details1
+ other_field2 | Unknown | Prescriptions details2
+
+Example:
+
+    $ curl --data "userid=556c4791af1dd1c9448b456c" https://www.revelcare.com/api/api.php?action=getPrescriptions
+
+    [
+        {
+            "_id": { "$id": "5579404faf1dd1f2438b4567" },
+            "userid": "556c4791af1dd1c9448b456c",
+            "name": "amoxycilin",
+            "dosage":"7ml x 2",
+            "other_field1": "some data here"
+        },
+        {
+            "_id": { "$id": "55794070af1dd1f1438b4568" },
+            "userid": "556c4791af1dd1c9448b456c",
+            "name": "metformin",
+            "dosage": "1 tablet per day",
+            "other_field1": "some data here"
+        }
+    ]
+
+Get Prescription by Prescription ID
+-----------------------------------
+
+`POST /api/api.php?action=getPrescription`
+
+Request:
+
+ *Field* | *Type* | *Description* 
+ --- | --- | ---
+ id | String | Unique ID of prescription 
+
+Response (Success - http code 200):
+
+ *Field* | *Type* | *Description* 
+ --- | --- | ---
+ id | String | Unique ID of prescription
+ userid | String | Unique ID of user
+ other_field1 | Unknown | Prescriptions details1
+ other_field2 | Unknown | Prescriptions details2
+
+Example:
+
+    $ curl --data "id=5579404faf1dd1f2438b4567" https://www.revelcare.com/api/api.php?action=getPrescription
+
+    {
+        "_id": { "$id": "5579404faf1dd1f2438b4567" },
+        "userid": "556c4791af1dd1c9448b456c",
+        "name": "amoxycilin",
+        "dosage":"7ml x 2",
+        "other_field1": "some data here"
+    },
+
+Get Latest News
+---------------
+
+`POST /api/api.php?action=getNews`
+
+Request:
+
+ *Field* | *Type* | *Description* 
+ --- | --- | ---
+
+Response (Success - http code 200): (list of the following objects)
+
+ *Field* | *Type* | *Description* 
+ --- | --- | ---
+ id | String | Unique ID of news article
+ other_field1 | Unknown | News details1
+ other_field2 | Unknown | News details2
+
+Example:
+
+    $ curl --data "" https://www.revelcare.com/api/api.php?action=getNews
+
+    [
+        {
+            "_id": { "$id": "55794415af1dd1f5438b4569" },
+            "topic": "Diabetes Type 2 cure?",
+            "keywords": [ "diabetes", "type 2", "cure" ],
+            "text": "Researchers at Cambridge claimed they have a cure for for Type 2 Diabetes"
+        },
+        {
+            "_id": { "$id": "55794451af1dd1f2438b4568" },
+            "topic": "Pancreatic Cancer cure?",
+            "keywords": [ "cancer", "pancreas", "cure" ],
+            "text": "Researchers in Illinois claimed they have a cure for for Pancreatic Cancer"
+        }
+    ]
+
 Request Invite Code
 -------------------
 
