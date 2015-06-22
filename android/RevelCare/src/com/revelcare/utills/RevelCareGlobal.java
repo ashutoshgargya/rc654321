@@ -15,19 +15,32 @@ public class RevelCareGlobal {
 	// validate invite code 
 	public static String Validate_Invite_Code = Base_URL + "validateInviteCode&code=%s";
 	
+	// insert user to server 
 	public static String InsertUser = Base_URL + "insertUser";
 	
+	// insert user data code
 	public static String Required_Data_User = "{\"email_address\":\"%s\",\"password\":\"%s\",\"name\":\"%s\"}";
 	
+	// get nearest pharmacy list 
 	public static String Pharmacies = Base_URL + "pharmacyList";
 	
+	// update user list 
 	public static String UpdateUser = Base_URL + "updateUser";
 	
+	// insert pickupwindow or time window 
 	public static String Insert_Pickup = Base_URL + "insertPickup";
 	
-	public static String InsuranceDetails =Base_URL+ "updateInsuranceDetails";
+	//add insurance details
+	public static String InsuranceDetails = Base_URL+ "updateInsuranceDetails";
 	
-	public static String Calling_Number = "408-663-4041";
+	// latest news 
+	public static String Latest_News = Base_URL + "getNews" ;
+	
+	public static String  Get_Prescription= Base_URL + "getPrescriptions";
+	
+	
+	public static String Calling_Number = "";
+	
 	
 	public static void toastShow(String message, Context context) {
 		Toast display = Toast.makeText(context, message, Toast.LENGTH_SHORT);

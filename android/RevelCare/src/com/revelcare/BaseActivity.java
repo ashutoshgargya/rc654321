@@ -30,6 +30,7 @@ public class BaseActivity extends FragmentActivity {
 		FragmentManager fragmentManager = getSupportFragmentManager();
 		FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 	    fragmentTransaction.add(R.id.fragmentLayout, fragment);
+	    fragmentTransaction.addToBackStack(null);
 		fragmentTransaction.commit();
 	}
 

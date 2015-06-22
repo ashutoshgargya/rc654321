@@ -8,19 +8,25 @@
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dim_6"
         android:gravity="center_horizontal"
-        android:text="@string/Invite_Request" />
+        android:text="@string/Invite_Request"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dim_20"
-        android:text="@string/Invite_Request_msg" />
+        android:lineSpacingMultiplier="1.2"
+        android:text="@string/Invite_Request_msg"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/dim_75"
-        android:layout_margin="@dimen/dim_20"
+        android:layout_marginLeft="@dimen/dim_20"
+        android:layout_marginRight="@dimen/dim_20"
+        android:layout_marginTop="@dimen/dim_20"
         android:orientation="horizontal" >
 
         <LinearLayout
@@ -33,7 +39,10 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/Name" />
+                android:layout_marginTop="@dimen/dim_6"
+                android:text="@string/Name"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textStyle="bold" />
         </LinearLayout>
 
         <LinearLayout
@@ -44,7 +53,7 @@
             android:orientation="vertical" >
 
             <EditText
-                android:id="@+id/editText_name" 
+                android:id="@+id/editText_name"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/white_bg"
@@ -58,6 +67,7 @@
         android:layout_height="@dimen/dim_75"
         android:layout_marginLeft="@dimen/dim_20"
         android:layout_marginRight="@dimen/dim_20"
+        android:layout_marginTop="@dimen/dim_20"
         android:orientation="horizontal" >
 
         <LinearLayout
@@ -70,7 +80,9 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/Email_Address" />
+                android:text="@string/Email_Address"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textStyle="bold" />
         </LinearLayout>
 
         <LinearLayout
@@ -93,17 +105,22 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dim_75"
+        android:layout_height="wrap_content"
         android:layout_margin="@dimen/dim_20"
         android:gravity="center_horizontal"
         android:orientation="horizontal" >
 
         <Button
             android:id="@+id/send_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dim_35"
+            android:layout_marginTop="@dimen/dim_40"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
             android:background="@drawable/gray_bg"
-            android:padding="@dimen/dim_10"
+            android:paddingLeft="@dimen/dim_15"
+            
+            android:paddingRight="@dimen/dim_15"
             android:text="@string/Send_Request" />
     </LinearLayout>
 

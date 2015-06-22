@@ -17,7 +17,7 @@
     <string name="Name">Name</string>
     <string name="address">Address</string>
     <string name="city">City</string>
-    <string name="DOB">Date OF Birth</string>
+    <string name="DOB">Date Of Birth</string>
     <string name="Email_Address">Email Address</string>
     <string name="phone_number">Phone Number</string>
     <string name="Send_Request">Send Request</string>
@@ -25,7 +25,7 @@
 	<string name="Pharmacy">Pharmacy</string>
 	<string name="Or_Enter_Zipcode">Or Enter Zipcode</string>
 	<string name="patient_screen_header">Please enter details for whom medicines are picked</string>
-	<string name="insurance_Screen_header">Please enter details insurance information</string>
+	<string name="insurance_Screen_header">Please enter details of insurance information</string>
 	<string name="insurance">Insurance</string>
 	<string name="loading_txt">Loading</string>
 	<string name="pharmacy">Pharmacy</string>
@@ -38,7 +38,15 @@
 	<string name="dob_empty">Please enter patient date of birthday</string>
 	<string name="prescripition_header">Please enter when your prescription to be delivered</string>
 	<string name="calling_header">Prescription Pickup Status</string>
-	<string name="enroute">person enroute</string>
-	<string name="call_to">call to talk to your care giver</string>
+	<string name="enroute">Person enroute</string>
+	<string name="call_to">Call to talk to your care giver</string>
+	<string name="error_msg">Error - Please check again</string>
+	<string name="nxt_txt">Next</string>
+	<string name="news_screen_header">Latest news and articles</string>
+	<string name="medicine_header">Medicine Cabinet</string>
+	<string name="btn_req">Request another perscription</string>
+	<string name="add_another">add another medicine to your cabinet</string>
+	<string name="add_topics">add medical topics to track</string>
+	<string name="prescription_drug">Prescription drugs </string>
 	
 </resources>

@@ -2,6 +2,8 @@ package com.revelcare;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.Window;
 
 import com.revelcare.fragments.PrescriptionPickUpFragment;
@@ -16,14 +18,12 @@ public class PrescriptionActivity extends BaseActivity {
 		addFragment(R.id.fragmentLayout,new PrescriptionPickUpFragment());
 	}
 	
-	@Override
 	public void addFragment(int id, Fragment fragment) {
-		super.addFragment(id, fragment);
-		/*FragmentManager fragmentManager = getSupportFragmentManager();
+		FragmentManager fragmentManager = getSupportFragmentManager();
 		FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 	    fragmentTransaction.add(R.id.fragmentLayout, fragment);
-	    fragmentTransaction.addToBackStack(null);
-		fragmentTransaction.commit();*/
+//	    fragmentTransaction.addToBackStack(null);
+		fragmentTransaction.commit();
 		
 	}
 }

@@ -136,7 +136,7 @@ public class PatientInformation extends Fragment implements OnClickListener {
 
 	private void updateUser(){
 		String URL = RevelCareGlobal.UpdateUser;
-		UpdatePatientINFOTask updateuser = new UpdatePatientINFOTask(getActivity(), response, "");
+		UpdatePatientINFOTask updateuser = new UpdatePatientINFOTask(getActivity(), response, "Saving");
 		updateuser.execute(URL,name, address, city, pincode, phone, DOB);
 	}
 	

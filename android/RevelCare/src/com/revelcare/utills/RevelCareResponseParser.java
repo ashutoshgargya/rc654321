@@ -8,6 +8,8 @@ import org.json.JSONObject;
 
 import android.content.Context;
 
+import com.revelcare.bean.NewsDetails;
+import com.revelcare.bean.PerscribedMedicine;
 import com.revelcare.bean.PharmacyDetails;
 
 public class RevelCareResponseParser {
@@ -15,6 +17,9 @@ public class RevelCareResponseParser {
 	String error = "error", message = "message", ID = "_id", code ="code";
 	String id = "$id", name = "name", description = "description";
 	String address = "address", phone = "phone";
+	String topic = "topic", text = "text";
+	
+	String dosage = "dosage",other = "other_field1";
 	
 	public String parseInviteCode(String response, Context context) {
 		try {
@@ -117,5 +122,51 @@ public class RevelCareResponseParser {
 			
 		}
 		return id;
+	}
+	
+	
+	public ArrayList<NewsDetails> getNews(JSONArray result){
+		ArrayList<NewsDetails> news = new ArrayList<NewsDetails>();
+		try {
+		for (int counter = 0; counter < result.length(); counter++) {
+			NewsDetails details = new NewsDetails();
+		    JSONObject single_news = result.getJSONObject(counter);
+		    if(single_news.has(topic)){
+		    	details.setTopic(single_news.getString(topic));
+		    }
+		    if(single_news.has(text)){
+		    	details.setDescription(single_news.getString(text));
+		    }
+		    news.add(details);
+		  }
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return news;
+		
+	}
+	
+	
+	public ArrayList<PerscribedMedicine> getPrescribeMedicine(JSONArray result){
+		ArrayList<PerscribedMedicine> perscribed_medicines= new ArrayList<PerscribedMedicine>();
+		try {
+		for (int counter = 0; counter < result.length(); counter++) {
+			PerscribedMedicine prescribed = new PerscribedMedicine();
+		    JSONObject medicine = result.getJSONObject(counter);
+		    
+		    if(medicine.has(name)){
+		    	prescribed.setName(medicine.getString(name));
+		    } if(medicine.has(dosage)){
+		    	prescribed.setDosage(medicine.getString(dosage));
+		    } if(medicine.has(other)){
+		    	prescribed.setOthers(other);
+		    }
+		    perscribed_medicines.add(prescribed);
+		  }
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		return perscribed_medicines;
 	}
 }

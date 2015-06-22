@@ -79,6 +79,7 @@ public class WelcomeFragment extends Fragment implements OnClickListener {
 		FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
 		FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 	    fragmentTransaction.replace(R.id.fragmentLayout, fragment);
+	    fragmentTransaction.addToBackStack(null);
 		fragmentTransaction.commit();
 	}
 	
@@ -115,7 +116,7 @@ public class WelcomeFragment extends Fragment implements OnClickListener {
 			Toast.makeText(getActivity(), "" + result, Toast.LENGTH_LONG)
 			.show();
 			error_txt_view.setVisibility(View.VISIBLE);
-			error_txt_view.setText("" + result);
+			error_txt_view.setText("" + getResources().getString(R.string.error_msg));
 		}
 	}
 }

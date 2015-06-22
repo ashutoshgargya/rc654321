@@ -74,7 +74,7 @@ public class RequestFragment extends Fragment implements OnClickListener {
 				NetworkUtil.TYPE_NOT_CONNECTED)) {
 			String email = email_edt_txt.getText().toString();
 			String name = name_edt_txt.getText().toString();
-			BackgroungTask task = new BackgroungTask(getActivity(), response,"Insertting User",true);
+			BackgroungTask task = new BackgroungTask(getActivity(), response,"Inserting User",true);
 			task.execute(URL,email,name);
 		}else{
 			MessageDialog dialog = new MessageDialog(getActivity(), "Internet is not found");

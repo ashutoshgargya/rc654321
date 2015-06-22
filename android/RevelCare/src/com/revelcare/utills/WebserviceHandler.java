@@ -21,6 +21,7 @@ import org.apache.http.client.params.HttpClientParams;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.entity.mime.MultipartEntity;
 import org.apache.http.entity.mime.content.FileBody;
+import org.apache.http.entity.mime.content.StringBody;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.params.BasicHttpParams;
@@ -260,14 +261,17 @@ public class WebserviceHandler {
 
 			HttpContext localContext = new BasicHttpContext();
 			HttpPost httpPost = new HttpPost(URL);
+			
 			httpPost.setHeader("Content-Disposition", "multipart/form-data");
-			List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
-			nameValuePairs.add(new BasicNameValuePair("id", preferences.getID()));
-			httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 			DefaultHttpClient httpClient = getHttpClient();
+			
 			MultipartEntity entity = new MultipartEntity();
-			entity.addPart("user_picture", new FileBody(file, "image/jpeg"));
+			entity.addPart("filedata", new FileBody(file, "image/jpeg"));
+			entity.addPart("id",new StringBody(preferences.getID()));
+			entity.addPart("insurance_fileid",new StringBody("55599c61af1dd17d038b4567"));
+			
 			httpPost.setEntity(entity);
+			
 			HttpResponse response = httpClient.execute(httpPost, localContext);
 			String responses = EntityUtils.toString(response.getEntity());
 			System.out.println("response"+responses);
@@ -279,4 +283,85 @@ public class WebserviceHandler {
 
 	}
 
+	public String postData(String url, String pickup_window, String date, Context context) {
+		Preferences preferences = Preferences.getInstance(context);
+		HttpEntity entity = null;
+		String result = null;
+	  
+		  // Create a new HttpClient and Post Header
+	    HttpClient httpclient = new DefaultHttpClient();
+	    HttpPost httppost = new HttpPost(url);
+	    try {
+	        // Add your data
+	        List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
+	        nameValuePairs.add(new BasicNameValuePair("userid", preferences.getID()));
+	        nameValuePairs.add(new BasicNameValuePair("pickup_window", pickup_window));
+	        nameValuePairs.add(new BasicNameValuePair("date", date));
+	        httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+
+	        // Execute HTTP Post Request
+	        HttpResponse response = httpclient.execute(httppost);
+	         entity = response.getEntity();
+	          result = EntityUtils.toString(entity);
+	         System.out.println("sss"+result);
+	        
+	    } catch (ClientProtocolException e) {
+	    	e.printStackTrace();
+	    } catch (IOException e) {
+	    	e.printStackTrace();
+	    }
+	    catch (Exception e) {
+	    	e.printStackTrace();
+	    }
+	    if(entity != null)
+			try {
+				return result;
+			
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		else 
+	    	return "null";
+		return "null";
+	} 
+
+	public String postData(String url, Context context,String userid) {
+//		Preferences preferences = Preferences.getInstance(context);
+		HttpEntity entity = null;
+		String result = null;
+	  
+		  // Create a new HttpClient and Post Header
+	    HttpClient httpclient = new DefaultHttpClient();
+	    HttpPost httppost = new HttpPost(url);
+	    try {
+	        // Add your data
+	        List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
+	        nameValuePairs.add(new BasicNameValuePair("userid", userid));
+	        httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+
+	        // Execute HTTP Post Request
+	        HttpResponse response = httpclient.execute(httppost);
+	         entity = response.getEntity();
+	          result = EntityUtils.toString(entity);
+	         System.out.println("sss"+result);
+	        
+	    } catch (ClientProtocolException e) {
+	    	e.printStackTrace();
+	    } catch (IOException e) {
+	    	e.printStackTrace();
+	    }
+	    catch (Exception e) {
+	    	e.printStackTrace();
+	    }
+	    if(entity != null)
+			try {
+				return result;
+			
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		else 
+	    	return "null";
+		return "null";
+	}
 }

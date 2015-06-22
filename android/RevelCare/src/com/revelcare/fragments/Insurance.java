@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -23,18 +24,22 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 
-import com.revelcare.BaseActivity;
 import com.revelcare.MenuScreen;
 import com.revelcare.R;
 import com.revelcare.utills.Preferences;
+import com.revelcare.utills.ProgressDialog;
+import com.revelcare.utills.RevelCareGlobal;
+import com.revelcare.utills.WebserviceHandler;
 
 public class Insurance extends Fragment implements OnClickListener {
-	private ImageView insurance_front, insurance_back;
+	private ImageView insurance_front;
 	private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE_FRONT = 100;
 	private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE_BACK = 200;
 	private Uri fileUri;
 	private Button btn_nxt;
 	private Preferences preferences;
+	private File file;
+	private ProgressDialog dialog;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -53,23 +58,24 @@ public class Insurance extends Fragment implements OnClickListener {
 	private void init() {
 		preferences = Preferences.getInstance(getActivity());
 		insurance_front = (ImageView) getView().findViewById(R.id.imageView_front);
-		insurance_back = (ImageView) getView().findViewById(R.id.imageView_back);
+//		insurance_back = (ImageView) getView().findViewById(R.id.imageView_back);
 		btn_nxt = (Button) getView().findViewById(R.id.btn_nxt);
 		btn_nxt.setOnClickListener(this);
-		insurance_back.setOnClickListener(this);
+//		insurance_back.setOnClickListener(this);
 		insurance_front.setOnClickListener(this);
 	}
 
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
-		case R.id.imageView_back:
+		/*case R.id.imageView_back:
 //			captureImage(CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE_BACK);
 			Intent intent = new Intent(getActivity(), MenuScreen.class);
 			startActivity(intent);
-			break;
+			break;*/
 		case R.id.imageView_front:
 			captureImage(CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE_FRONT);
+			
 			break;
 		case R.id.btn_nxt:
 			addFragment(R.id.fragment_container, new Deliver());
@@ -116,7 +122,6 @@ public class Insurance extends Fragment implements OnClickListener {
 	  	                // Convert ByteArray to Bitmap::
 	  	                Bitmap bitmap = BitmapFactory.decodeByteArray(byteArray, 0,byteArray.length);
 	  	                saveToLocalSDCard(bitmap, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE_BACK);
-	  	                insurance_back.setImageBitmap(bitmap);
 	            }
 	        }        
 	    }    
@@ -143,6 +148,8 @@ public class Insurance extends Fragment implements OnClickListener {
 			fo.write(bytes.toByteArray());
 			// remember close de FileOutput
 			fo.close();
+			
+			uploadImage();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -154,5 +161,41 @@ public class Insurance extends Fragment implements OnClickListener {
 	    fragmentTransaction.replace(R.id.fragmentLayout, fragment);
 		fragmentTransaction.commit();
 	}
+	private void uploadImage(){
+		 file = new File(Environment.getExternalStorageDirectory()+ File.separator + "front.jpg");
+		 UplaodImageTask task = new UplaodImageTask();
+		 task.execute("");
+	}
 	
-}
+	
+	class UplaodImageTask extends AsyncTask<String, Long, String> {
+
+		@Override
+		protected void onPreExecute() {
+			super.onPreExecute();
+			dialog = new ProgressDialog(getActivity(),"uploading image");
+			dialog.show();
+		}
+
+		@Override
+		protected void onPostExecute(String result) {
+			super.onPostExecute(result);
+			System.out.println("result "+result);
+			if(dialog != null)
+				dialog.dismiss();
+			}
+
+			
+
+			@Override
+			protected String doInBackground(String... params) {
+				WebserviceHandler handler = new WebserviceHandler(getActivity());
+				
+				String response = handler.uploadFiles(RevelCareGlobal.InsuranceDetails,
+								file, getActivity());
+				System.out.println("RES : " + response);
+				return response;
+			}
+
+		}
+	}

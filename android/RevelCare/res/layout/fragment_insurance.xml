@@ -2,14 +2,16 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
-    
+
     <TextView
         android:id="@+id/textView1"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dim_10"
         android:background="@drawable/gray_bg"
         android:padding="@dimen/dim_10"
-        android:text="@string/insurance_Screen_header" />
+        android:text="@string/insurance_Screen_header"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <ScrollView
         android:id="@+id/scrollView1"
@@ -25,20 +27,24 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_marginTop="@dimen/dim_30"
-                android:layout_height="wrap_content" >
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/dim_6"
+                android:layout_marginTop="@dimen/dim_45" >
 
                 <TextView
                     android:id="@+id/textView_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/insurance" />
+                    android:layout_marginLeft="10dp"
+                    android:text="@string/insurance"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
 
                 <EditText
                     android:id="@+id/editText_name"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="@dimen/dim_40"
                     android:layout_alignParentRight="true"
+                    
                     android:background="@drawable/white_bg"
                     android:ems="10"
                     android:inputType="textPersonName" />
@@ -48,20 +54,16 @@
 
     <Button
         android:id="@+id/btn_nxt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dim_35"
         android:layout_centerHorizontal="true"
-        android:text="next" />
+        android:layout_alignParentBottom="true"
+     	 android:layout_marginLeft="45dp"
+        android:layout_marginRight="45dp"
+        android:layout_marginBottom="80dp"
+        android:background="@drawable/gray_bg"
+        android:text="@string/nxt_txt" />
 
-    <ImageView
-        android:id="@+id/imageView_back"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/button1"
-        android:layout_centerVertical="true"
-        android:visibility="gone"
-        android:src="@drawable/ic_launcher" />
 
     <ImageView
         android:id="@+id/imageView_front"
@@ -72,4 +74,3 @@
         android:src="@drawable/camera" />
 
 </RelativeLayout>
-

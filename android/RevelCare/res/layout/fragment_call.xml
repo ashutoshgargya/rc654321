@@ -4,12 +4,14 @@
     android:layout_height="match_parent" >
 
     <TextView
-        android:id="@+id/textView_call_header"
-        android:layout_width="fill_parent"
+        android:id="@+id/header_pickup_prescription"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/gray_bg"
         android:padding="@dimen/dim_10"
-        android:text="@string/calling_header" />
+        android:text="@string/calling_header"
+        android:layout_margin="10dp"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <RelativeLayout
         android:id="@+id/relativeLayout1"
@@ -24,6 +26,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/dim_45"
+            android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="@string/enroute" />
 
         <ImageView
@@ -32,15 +36,16 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/textView_text1"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="15dp"
             android:src="@drawable/calling_tab" />
-        <TextView
+
+        <TextView
             android:id="@+id/textView_call"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/call_btn"
-            android:layout_marginTop="15dp"
             android:layout_centerHorizontal="true"
+             android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_marginTop="@dimen/dim_45"
             android:text="@string/call_to" />
     </RelativeLayout>
 

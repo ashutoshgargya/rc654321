@@ -11,7 +11,8 @@
         android:layout_height="wrap_content"
         android:background="@drawable/gray_bg"
         android:padding="@dimen/dim_10"
-        android:text="@string/Please_enter_prescription_pickup_information" />
+        android:text="@string/Please_enter_prescription_pickup_information"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <RelativeLayout
         android:id="@+id/parent_pharmacy_edt_txt"
@@ -24,12 +25,14 @@
             android:id="@+id/textView_pharmacy"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/Pharmacy" />
+            android:layout_marginLeft="@dimen/dim_10"
+            android:text="@string/Pharmacy"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <AutoCompleteTextView
             android:id="@+id/editText_pharmacy"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/dim_40"
             android:layout_alignParentRight="true"
             android:background="@drawable/white_bg"
             android:ems="10"
@@ -38,11 +41,15 @@
 
     <Button
         android:id="@+id/btn_next"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dim_35"
+        android:layout_below="@+id/editText_address"
         android:layout_centerHorizontal="true"
-        android:text="next" />
+        android:layout_marginLeft="45dp"
+        android:layout_marginRight="45dp"
+        android:layout_marginTop="60dp"
+        android:background="@drawable/gray_bg"
+        android:text="@string/nxt_txt" />
 
     <RelativeLayout
         android:id="@+id/relativeLayout_pharmacy_description"
@@ -50,6 +57,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/parent_pharmacy_edt_txt"
         android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp"
         android:layout_marginLeft="5dp"
         android:layout_marginTop="25dp" >
 
@@ -84,16 +92,17 @@
     <EditText
         android:id="@+id/editText_address"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/dim_45"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/relativeLayout_pharmacy_description"
+        android:layout_marginLeft="@dimen/dim_10"
+        android:layout_marginTop="10dp"
         android:background="@drawable/white_bg"
         android:ems="10"
-        android:lines="2"
-        android:layout_marginTop="10dp"
         android:gravity="center_horizontal"
         android:hint="@string/zipcode"
-        android:inputType="textPersonName" >
+        android:inputType="textPersonName"
+        android:lines="2" >
     </EditText>
 
 </RelativeLayout>

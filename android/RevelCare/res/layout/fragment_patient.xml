@@ -7,16 +7,19 @@
         android:id="@+id/textView1"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dim_10"
         android:background="@drawable/gray_bg"
         android:padding="@dimen/dim_10"
-        android:text="@string/patient_screen_header" />
+        android:text="@string/patient_screen_header"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <ScrollView
         android:id="@+id/scrollView1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/textView1"
-        android:layout_centerHorizontal="true" >
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/dim_30" >
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -39,11 +42,15 @@
                 <EditText
                     android:id="@+id/editText_name"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="@dimen/dim_40"
                     android:layout_alignParentRight="true"
                     android:background="@drawable/white_bg"
                     android:ems="10"
-                    android:inputType="textPersonName" />
+                    android:inputType="textPersonName"
+                    android:paddingLeft="5dp" >
+
+                    <requestFocus />
+                </EditText>
             </RelativeLayout>
 
             <RelativeLayout
@@ -60,13 +67,12 @@
                 <EditText
                     android:id="@+id/editText_address"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="@dimen/dim_40"
                     android:layout_alignParentRight="true"
                     android:background="@drawable/white_bg"
                     android:ems="10"
-                    android:inputType="textPostalAddress" >
-
-                    <requestFocus />
+                    android:inputType="textPostalAddress"
+                    android:paddingLeft="5dp" >
                 </EditText>
             </RelativeLayout>
 
@@ -84,13 +90,12 @@
                 <EditText
                     android:id="@+id/editText_city"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="@dimen/dim_40"
                     android:layout_alignParentRight="true"
                     android:background="@drawable/white_bg"
                     android:ems="10"
-                    android:inputType="textPersonName" >
-
-                    <requestFocus />
+                    android:inputType="textPersonName"
+                    android:paddingLeft="5dp" >
                 </EditText>
             </RelativeLayout>
 
@@ -105,17 +110,18 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="5"
-                    android:text="state" />
+                    android:text="State" />
 
                 <EditText
                     android:id="@+id/editText_state"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="@dimen/dim_40"
                     android:layout_alignParentRight="true"
                     android:layout_weight="3"
                     android:background="@drawable/white_bg"
                     android:ems="10"
-                    android:inputType="textPersonName" >
+                    android:inputType="textPersonName"
+                    android:paddingLeft="5dp" >
                 </EditText>
 
                 <TextView
@@ -124,17 +130,18 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="7"
                     android:gravity="center_horizontal"
-                    android:text="zipcode" />
+                    android:text="Zipcode" />
 
                 <EditText
                     android:id="@+id/editText_zipcode"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="@dimen/dim_40"
                     android:layout_alignParentRight="true"
                     android:layout_weight="5"
                     android:background="@drawable/white_bg"
                     android:ems="10"
-                    android:inputType="textPhonetic" >
+                    android:inputType="phone"
+                    android:paddingLeft="5dp" >
                 </EditText>
             </LinearLayout>
 
@@ -147,18 +154,18 @@
                     android:id="@+id/textView_phone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:ellipsize="end"
                     android:text="@string/phone_number" />
 
                 <EditText
                     android:id="@+id/editText_phone"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="@dimen/dim_40"
                     android:layout_alignParentRight="true"
                     android:background="@drawable/white_bg"
                     android:ems="10"
-                    android:inputType="phone" >
-
-                    <requestFocus />
+                    android:inputType="phone"
+                    android:paddingLeft="5dp" >
                 </EditText>
             </RelativeLayout>
 
@@ -176,28 +183,30 @@
                 <EditText
                     android:id="@+id/editText_DOB"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="@dimen/dim_40"
                     android:layout_alignParentRight="true"
                     android:background="@drawable/white_bg"
                     android:ems="10"
-                    android:gravity="center_horizontal"
                     android:focusable="false"
-                    android:hint="DD/MM/YYYY"
                     android:focusableInTouchMode="false"
-                    android:inputType="textPersonName" >
-
-                    <requestFocus />
+                    android:gravity="center_horizontal"
+                    android:hint="DD/MM/YYYY"
+                    android:inputType="textPersonName"
+                    android:paddingLeft="5dp" >
                 </EditText>
             </RelativeLayout>
+
+            <Button
+                android:id="@+id/btn_nxt"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dim_35"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="45dp"
+                android:layout_marginRight="45dp"
+                android:layout_marginTop="45dp"
+                android:background="@drawable/gray_bg"
+                android:text="@string/nxt_txt" />
         </LinearLayout>
     </ScrollView>
-
-    <Button
-        android:id="@+id/btn_nxt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:text="next" />
 
 </RelativeLayout>

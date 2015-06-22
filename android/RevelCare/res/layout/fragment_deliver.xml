@@ -7,25 +7,19 @@
         android:id="@+id/textView_prescription"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="10dp"
         android:background="@drawable/gray_bg"
         android:padding="@dimen/dim_10"
-        android:text="@string/prescripition_header" />
-
-    <Button
-        android:id="@+id/btn_nxt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="33dp"
-        android:text="Done" />
+        android:text="@string/prescripition_header"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <ScrollView
         android:id="@+id/scrollView1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/textView_prescription"
-        android:layout_centerHorizontal="true" >
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/dim_20" >
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -33,125 +27,118 @@
             android:orientation="vertical" >
 
             <LinearLayout
-                android:id="@+id/linearLayout1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/textView1"
-                android:gravity="center_horizontal"
                 android:orientation="horizontal"
                 android:weightSum="10" >
 
                 <LinearLayout
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_alignLeft="@+id/btn_nxt"
-                    android:layout_alignParentTop="true"
-                    android:layout_weight="3"
-                    android:gravity="center" >
+                    android:layout_height="match_parent"
+                    android:layout_weight="5"
+                    android:orientation="vertical"
+                    android:weightSum="16" >
+
+                    <TextView
+                        android:id="@+id/textView1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="8"
+                        android:text="Today"
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
 
                     <TextView
                         android:id="@+id/textView2"
                         android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:text="Today" />
+                        android:layout_height="0dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="8"
+                        android:text="Tomorrow"
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="7"
-                    android:gravity="center"
+                    android:layout_height="match_parent"
+                    android:layout_weight="5"
                     android:orientation="vertical" >
 
                     <RadioGroup
                         android:id="@+id/radioGroup_today"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" >
+                        android:layout_height="wrap_content"
+                        android:weightSum="16" >
 
                         <RadioButton
                             android:id="@+id/rd_btn_lunch_today"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_height="0dp"
+                            android:layout_weight="2"
                             android:text="12:00PM-03:00PM" />
 
                         <RadioButton
                             android:id="@+id/rd_btn_evening_today"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_height="0dp"
+                            android:layout_weight="2"
                             android:text="03:00PM-06:00PM" />
 
                         <RadioButton
                             android:id="@+id/rd_btn_nyt_today"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_height="0dp"
+                            android:layout_weight="2"
                             android:text="06:00PM-09:00PM" />
-                    </RadioGroup>
-                </LinearLayout>
-            </LinearLayout>
 
-            <LinearLayout
-                android:id="@+id/linearLayout1_tm"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dim_15"
-                android:gravity="center_horizontal"
-                android:orientation="horizontal"
-                android:weightSum="10" >
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_alignLeft="@+id/btn_nxt"
-                    android:layout_alignParentTop="true"
-                    android:layout_weight="3"
-                    android:gravity="center" >
-
-                    <TextView
-                        android:id="@+id/textView	"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:text="Tommorrow" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="7"
-                    android:gravity="center_horizontal"
-                    android:orientation="vertical" >
-
-                    <RadioGroup
-                        android:id="@+id/radioGroup_tomorrow"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        >
+                        <RadioButton
+                            android:id="@+id/rd_btn_nyt_today_hide"
+                            android:layout_width="wrap_content"
+                            android:layout_height="0dp"
+                            android:layout_weight="2"
+                            android:text="06:00PM-09:00PM"
+                            android:visibility="invisible" />
 
                         <RadioButton
                             android:id="@+id/rd_btn_morn_tm"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="09:00AM-12:00PM" />
+                            android:layout_height="0dp"
+                            android:layout_weight="2"
+                            android:text="09:00PM-12:00PM" />
 
                         <RadioButton
                             android:id="@+id/rd_btn_lunch_tm"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_height="0dp"
+                            android:layout_weight="2"
                             android:text="12:00PM-03:00PM" />
 
                         <RadioButton
                             android:id="@+id/rd_btn_evening_tm"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_height="0dp"
+                            android:layout_weight="2"
                             android:text="03:00PM-06:00PM" />
 
                         <RadioButton
                             android:id="@+id/rd_btn_nyt_tm"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_height="0dp"
+                            android:layout_weight="2"
                             android:text="06:00PM-09:00PM" />
                     </RadioGroup>
                 </LinearLayout>
             </LinearLayout>
+
+            <Button
+                android:id="@+id/btn_nxt"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dim_35"
+               android:layout_marginLeft="45dp"
+                android:layout_marginRight="45dp"
+                android:layout_marginTop="45dp"
+                android:background="@drawable/gray_bg"
+                android:text="Done" />
         </LinearLayout>
     </ScrollView>
 
