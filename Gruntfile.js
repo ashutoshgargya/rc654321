@@ -63,18 +63,17 @@ module.exports = function( grunt ) {
         ],
 
         vendor_health_js_list: [
-            "src/js/lib/misc/modernizr.min.js",
-            "src/js/lib/jquery/jquery-1.11.3.min.js",
-            "src/js/lib/jquery/jquery.cookie.js",
-            "src/js/lib/angular/angular.min.js",
-            "src/js/lib/angular/angular-resource.js",
-            "src/js/lib/angular/angular-route.js",
-            "src/js/lib/angular/angular-sanitize.js",
-            "src/js/lib/angular/angular-touch.min.js",
-            "src/js/lib/angular/angular-animate.js",
-            "src/js/lib/bootstrap/bootstrap.min.js",
-            "src/js/lib/bootstrap/ui-bootstrap-tpls.min.js",
-            "src/js/lib/misc/bootbox.min.js",
+            "node_modules/jquery/dist/jquery.min.js",
+            "node_modules/jquery.cookie/jquery.cookie.js",
+            "node_modules/angular/angular.min.js",
+            "node_modules/angular-resource/angular-resource.min.js",
+            "node_modules/angular-route/angular-route.min.js",
+            "node_modules/angular-sanitize/angular-sanitize.min.js",
+            "node_modules/angular-touch/angular-touch.min.js",
+            "node_modules/angular-animate/angular-animate.min.js",
+            "node_modules/bootstrap/dist/js/bootstrap.min.js",
+            "node_modules/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js",
+            "node_modules/bootbox/bootbox.min.js"
         ],
 
         health_css_list: [

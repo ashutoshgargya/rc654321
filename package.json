@@ -1,32 +1,43 @@
 {
-  "name": "healthco-app",
-  "version": "1.0.0",
-  "description": "HealthCo App NPM file",
-  "private": true,
-  "dependencies": {
-    "grunt-contrib-concat": "latest",
-    "grunt-contrib-cssmin": "latest",
-    "grunt-contrib-less": "latest",
-    "grunt-contrib-uglify": "latest"
-  },
-  "devDependencies": {
-    "grunt": "latest",
-    "grunt-preprocess": "latest",
-    "grunt-shell": "latest",
-    "karma": "latest",
-    "karma-chrome-launcher": "latest",
-    "karma-coverage": "latest",
-    "karma-firefox-launcher": "latest",
-    "karma-jasmine": "latest",
-    "karma-chrome-launcher": "latest",
-    "karma-coverage": "latest",
-    "karma-firefox-launcher": "latest",
-    "karma-jasmine": "latest",
-    "karma-ng-html2js-preprocessor": "latest",
-    "karma-phantomjs-launcher": "latest",
-    "karma-safari-launcher": "latest",
-    "logentries": "latest",
-    "q": "latest"
-  }
+    "name": "healthco-app",
+    "version": "1.0.0",
+    "description": "HealthCo App NPM file",
+    "private": true,
+    "dependencies": {
+        "angular": "latest",
+        "angular-resource": "latest",
+        "angular-route": "latest",
+        "angular-sanitize": "latest",        
+        "angular-touch": "latest",
+        "angular-animate": "latest",
+        "bootstrap": "latest",
+        "angular-ui-bootstrap": "latest",
+        "bootbox": "latest",
+        "jquery": "latest",
+        "jquery.cookie": "latest"
+    },
+    "devDependencies": {
+        "grunt": "latest",
+        "grunt-preprocess": "latest",
+        "grunt-shell": "latest",
+        "grunt-contrib-concat": "latest",
+        "grunt-contrib-cssmin": "latest",
+        "grunt-contrib-less": "latest",
+        "grunt-contrib-uglify": "latest",
+        "karma": "latest",
+        "karma-chrome-launcher": "latest",
+        "karma-coverage": "latest",
+        "karma-firefox-launcher": "latest",
+        "karma-jasmine": "latest",
+        "karma-chrome-launcher": "latest",
+        "karma-coverage": "latest",
+        "karma-firefox-launcher": "latest",
+        "jasmine-core": "latest",
+        "phantomjs-prebuilt": "latest",
+        "karma-jasmine": "latest",
+        "karma-ng-html2js-preprocessor": "latest",
+        "karma-phantomjs-launcher": "latest",
+        "karma-safari-launcher": "latest"
+    }
 }
 
